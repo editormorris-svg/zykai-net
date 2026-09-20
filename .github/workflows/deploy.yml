@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out public website repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Prepare Pages artifact from public-only snapshot
         shell: bash
