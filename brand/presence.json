@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "name": "ZhiAn YunKe",
+  "short_name": "ZYK",
+  "name_zh_cn": "智安云科",
+  "website": "https://zykai.net",
+  "email": "hello@zykai.net",
+  "publishing_enabled": false,
+  "verified_profiles": [],
+  "preferred_handle": "zykai",
+  "fallback_handle": "zhianyunke",
+  "handle_status": "proposed_not_verified_or_reserved",
+  "target_platforms": ["facebook", "linkedin", "instagram", "threads", "x", "youtube", "tiktok"],
+  "legacy_policy": "Preserve Oxbridge College and earlier William Morris identities as founder history. Never rename, merge, delete, or use them as ZYK publishing destinations."
+}

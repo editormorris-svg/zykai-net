@@ -1,0 +1,40 @@
+name: ZYK public presence check
+
+on:
+  pull_request:
+    paths:
+      - 'public-site/**'
+      - 'brand/**'
+      - 'scripts/**'
+      - '.github/workflows/**'
+  workflow_run:
+    workflows: ['Deploy ZYK to zykai.net']
+    branches: [main]
+    types: [completed]
+  schedule:
+    - cron: '23 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: presence-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Test identity safeguards
+        run: python3 -m unittest discover -s scripts -p 'test_*.py'
+      - name: Build and check local links
+        run: python3 scripts/build_presence.py
+      - name: Check published channel pages
+        if: github.event_name != 'pull_request'
+        run: python3 scripts/build_presence.py --check-live
