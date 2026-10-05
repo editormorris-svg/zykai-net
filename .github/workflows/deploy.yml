@@ -5,13 +5,13 @@ on:
     branches: [main]
     paths:
       - 'public-site/**'
+      - 'brand/**'
+      - 'scripts/**'
       - '.github/workflows/deploy.yml'
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: pages
@@ -20,29 +20,30 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Check out public website repository
-        uses: actions/checkout@v4
-
-      - name: Prepare Pages artifact from public-only snapshot
-        shell: bash
-        run: |
-          test -f public-site/index.html
-          rm -rf site
-          mkdir -p site
-          cp -R public-site/. site/
-          printf 'zykai.net\n' > site/CNAME
-
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Test identity and historical-account safeguards
+        run: python3 -m unittest discover -s scripts -p 'test_*.py'
+      - name: Build public website and verified channel register
+        run: python3 scripts/build_presence.py
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./site
 
   deploy:
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     needs: build
     steps:
       - name: Deploy to GitHub Pages
