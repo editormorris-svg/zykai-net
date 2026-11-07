@@ -1,8 +1,128 @@
 {
   "name": "ZhiAn YunKe",
-  "short_name": "ZYK",
   "name_zh_cn": "智安云科",
+  "short_name": "ZYK",
   "website": "https://zykai.net",
   "email": "hello@zykai.net",
-  "profiles": []
+  "executive_lead": {
+    "name": "William Morris",
+    "title": "Founder & Principal Consultant · Senior International Educator & Official Internal Referrer",
+    "email": "william@zykai.net",
+    "institutional_pedigree": [
+      "Nord Anglia Education (NAS Jiaxing & 13 China Sister Schools / 80+ Global Campuses)",
+      "Wellington College Education (China & International Bilingual Leadership Network)",
+      "Oxbridge College & UK-China International Curriculum Programmes (IGCSE / A-Level / IB)",
+      "Cross-Border EdTech Systems & Sovereign School AI Infrastructure Architect"
+    ],
+    "revenue_pillars": [
+      {
+        "id": "executive-headhunting-referrals",
+        "title": "Global School Headhunting & Official Internal Referrals",
+        "url": "https://zykai.net/en/referral.html#open-positions",
+        "summary": "Direct SLT/HR fast-track placement into Nord Anglia, Wellington, and premier bilingual schools worldwide with William Morris locked as Official Internal Referrer."
+      },
+      {
+        "id": "school-ai-consultancy",
+        "title": "School AI Transformation & Bilingual Curriculum Consultancy",
+        "url": "https://zykai.net/en/about.html#executive-consultancy",
+        "summary": "Turnkey private AI infrastructure, Cambridge/A2 22-Book Classic Literature Hybrid Cinema pipelines, and bilingual teacher-workload automation."
+      },
+      {
+        "id": "bespoke-ai-ambassadors",
+        "title": "Bespoke AI Brand Ambassadors & Multi-Border Media Studios",
+        "url": "https://zykai.net/en/about.html#ai-brand-ambassadors",
+        "summary": "Custom bilingual executive personas (like Mr. Sterling & Ms. Lin) engineered for parent acquisition, faculty recruitment, and institutional storytelling."
+      }
+    ]
+  },
+  "ai_ambassadors": [
+    {
+      "id": "arthur-sterling",
+      "name": "Mr. Arthur Sterling",
+      "role_en": "AI Head of British & International Academic Standards",
+      "role_zh": "英式与国际学术标准首席数字大使",
+      "specialty": "SLT Recruitment Interviews, British Pastoral Governance & Executive Commentary",
+      "sample_video": "https://zykai.net/assets/media/pilot-ep1-16x9.mp4"
+    },
+    {
+      "id": "lin-xia",
+      "name": "Ms. Lin Xia (林夏)",
+      "role_en": "AI Director of Bilingual Innovation & China Parent Relations",
+      "role_zh": "双语教学创新与中国家长关系总监数字大使",
+      "specialty": "China Bilingual Curriculum Integration, Parent Communication & Red Book / Douyin Short-Form Strategy",
+      "sample_video": "https://zykai.net/assets/media/pilot-ep2-9x16.mp4"
+    },
+    {
+      "id": "julian-vance",
+      "name": "Prof. Julian Vance",
+      "role_en": "AI Classical Literature & Humanities Laureate",
+      "role_zh": "22部世界经典文学混合影院首席导读官",
+      "specialty": "22-Book Cambridge A2/B1 Classic Literature Hybrid Cinema Series (Shakespeare, Dickens, Kipling, Shelley)",
+      "sample_video": "https://zykai.net/assets/media/pilot-ep1-9x16.mp4"
+    },
+    {
+      "id": "maya-chen",
+      "name": "Maya Chen (陈玛雅)",
+      "role_en": "AI Cross-Border Systems & Safeguarding Architect",
+      "role_zh": "跨境人工智能合规与幕后实验日志主理人",
+      "specialty": "Behind-the-Scenes 'Perfect Imperfections' Chronicle, Cross-Border AI Guardrails & EdTech Engineering",
+      "sample_video": "https://zykai.net/assets/media/pilot-ep2-9x16.mp4"
+    }
+  ],
+  "profiles": [
+    {
+      "platform": "LinkedIn (Executive & School Board Anchor)",
+      "region": "International",
+      "url": "https://www.linkedin.com/company/zhian-yunke",
+      "strategy": "Executive thought leadership, Nord Anglia / Wellington / Bilingual SLT headhunting briefs, and cross-border school AI consultancy case studies."
+    },
+    {
+      "platform": "YouTube (@ZYK-EdTech)",
+      "region": "International",
+      "url": "https://www.youtube.com/@ZYK-EdTech",
+      "strategy": "16:9 widescreen episodes of Mr. Sterling & Ms. Lin, 22-Book Classic Literature A2 Complete Reels, and 'How We Built It (Perfect Imperfections)' engineering breakdowns."
+    },
+    {
+      "platform": "X / Twitter (@William79540072)",
+      "region": "International",
+      "url": "https://x.com/William79540072",
+      "strategy": "Real-time cross-border AI lab notes, Western vs. China model safeguarding discoveries, and global international-school leadership commentary."
+    },
+    {
+      "platform": "Facebook (ZYK EdTech Official Page)",
+      "region": "International",
+      "url": "https://www.facebook.com/profile.php?id=61574072410786",
+      "strategy": "Expat educator community hub, international school vacancy alerts, and relocation/onboarding guides for teachers moving to China & SE Asia."
+    },
+    {
+      "platform": "Instagram (@zykai_edtech)",
+      "region": "International",
+      "url": "https://www.instagram.com/zykai_edtech/",
+      "strategy": "9:16 Reels of Mr. Sterling & Ms. Lin, visual storyboards from the 22-Book Literature Series, and behind-the-scenes studio bloopers."
+    },
+    {
+      "platform": "TikTok International (@zyk_ai)",
+      "region": "International",
+      "url": "https://www.tiktok.com/@zyk_ai",
+      "strategy": "High-retention 25–45s educator career hooks, interview red flags, and AI classroom transformation showcases."
+    },
+    {
+      "platform": "Douyin / 抖音 (智安云科 ZYK 双语名校内推与AI实验室)",
+      "region": "China Domestic",
+      "url": "https://zykai.net/zh-cn/channels.html#china-matrix",
+      "strategy": "9:16 speech-synced bilingual micro-dramas (Ms. Lin & Mr. Sterling) targeting Chinese bilingual teachers & returning overseas graduates seeking Nord Anglia / Wellington roles."
+    },
+    {
+      "platform": "Xiaohongshu / 小红书 (William老师·国际学校内推与AI教研)",
+      "region": "China Domestic",
+      "url": "https://zykai.net/zh-cn/channels.html#china-matrix",
+      "strategy": "Carousel guides on Tier-1 bilingual school interview preparation, parent-communication templates, and real classroom AI tools."
+    },
+    {
+      "platform": "Bilibili / 哔哩哔哩 (ZYK跨国AI造物局 & 22部英文名著剧场)",
+      "region": "China Domestic",
+      "url": "https://zykai.net/zh-cn/channels.html#china-matrix",
+      "strategy": "Long-form 16:9 22-Book Classic Literature bilingual cinema lessons + 'Perfect Imperfections' cross-border AI engineering documentaries."
+    }
+  ]
 }
