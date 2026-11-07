@@ -31,7 +31,7 @@ jobs:
       - name: Build public website and verified channel register
         run: python3 scripts/build_presence.py
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ./site
 
