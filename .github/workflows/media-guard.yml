@@ -1,0 +1,55 @@
+name: media-guard
+
+# Enforces ops/FILE-SYNC-AND-VAULT-AIRGAP-PROTOCOL-2026-11-07.md section 2b:
+# Git carries code, configuration, documentation and small manifests -- never
+# bulk media payloads.
+#
+# Scope is deliberately DIFF-BASED: it judges only files this push/PR adds or
+# modifies, so legacy media already on the branch does not turn CI red. It is a
+# forward guard, not a retroactive one.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  reject-new-oversized-blobs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Reject newly added or modified files over 5 MB
+        shell: bash
+        run: |
+          LIMIT=5242880
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE="${{ github.event.pull_request.base.sha }}"
+          else
+            BASE="${{ github.event.before }}"
+          fi
+          if [ -z "$BASE" ] || ! git cat-file -e "$BASE^{commit}" 2>/dev/null; then
+            BASE="$(git rev-list --max-parents=0 HEAD | tail -1)"
+          fi
+          echo "Comparing against $BASE"
+          fail=0
+          while IFS= read -r f; do
+            [ -n "$f" ] || continue
+            [ -f "$f" ] || continue
+            s=$(stat -c%s "$f")
+            if [ "$s" -gt "$LIMIT" ]; then
+              echo "::error file=$f::$s bytes exceeds ${LIMIT} (ZYK media-in-git policy section 2b)"
+              fail=1
+            fi
+          done < <(git diff --name-only --diff-filter=ACMR "$BASE" HEAD)
+          if [ "$fail" = 1 ]; then
+            echo "::error::Git carries code and manifests, not media payloads."
+            echo "Move the asset to HIM/Vault or object storage and commit a manifest instead."
+            exit 1
+          fi
+          echo "PASS -- no new oversized files in scope."
