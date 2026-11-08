@@ -1,0 +1,25 @@
+# ZYK policy: FILE-SYNC-AND-VAULT-AIRGAP-PROTOCOL-2026-11-07.md section 2b
+# Binary media is never diffed, merged or text-normalised by git.
+*.mp4  -diff -merge -text
+*.mov  -diff -merge -text
+*.webm -diff -merge -text
+*.mkv  -diff -merge -text
+*.wav  -diff -merge -text
+*.mp3  -diff -merge -text
+*.m4a  -diff -merge -text
+*.jpg  -diff -merge -text
+*.jpeg -diff -merge -text
+*.png  -diff -merge -text
+*.gif  -diff -merge -text
+*.webp -diff -merge -text
+*.zip  -diff -merge -text
+*.tar  -diff -merge -text
+*.gz   -diff -merge -text
+*.7z   -diff -merge -text
+*.pdf  -diff -merge -text
+*.onnx -diff -merge -text
+*.safetensors -diff -merge -text
+# Generated build output must not be versioned.
+/site/        export-ignore
+/public-site/ export-ignore
+/dist/        export-ignore

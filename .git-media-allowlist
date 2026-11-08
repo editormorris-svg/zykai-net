@@ -1,0 +1,3 @@
+# Paths permitted to exceed the 5 MB media guard (git-media-guard.sh).
+# One glob per line. Justify every entry in the commit message.
+# Prefer a manifest (path + sha256 + bytes) over an exception.
