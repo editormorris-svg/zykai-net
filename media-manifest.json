@@ -1,0 +1,205 @@
+{
+  "generated_utc": "2026-11-08T10:56:05.281187+00:00",
+  "policy": "ops/FILE-SYNC-AND-VAULT-AIRGAP-PROTOCOL-2026-11-07.md section 2b",
+  "note": "",
+  "source": {
+    "kind": "git",
+    "repo": "/home/dell01/work/zykai-studio/zykai-net",
+    "rev": "HEAD",
+    "prefix": ""
+  },
+  "count": 38,
+  "total_bytes": 236282006,
+  "files": [
+    {
+      "path": "public-site/assets/img/mr_sterling_ref.png",
+      "bytes": 764052,
+      "sha256": "4096e851d539406961defa030524074917a92c3bc646528d609a858d341cae5b"
+    },
+    {
+      "path": "public-site/assets/img/ms_lin_ref.png",
+      "bytes": 723248,
+      "sha256": "10960854b117c9e29b7a788a5878ea0e872cdfb2215a6da7794d8d9aa160ee88"
+    },
+    {
+      "path": "public-site/assets/img/student_chloe_ref.png",
+      "bytes": 831633,
+      "sha256": "4d3cb5f8d530f21f045498664aa02a075ad816570f08d582391143e273814fc2"
+    },
+    {
+      "path": "public-site/assets/img/student_leo_ref.png",
+      "bytes": 956004,
+      "sha256": "656b19f23ef0082195d0055af64797d3a1a3a76ec8ee22893a243c6d33b9ea93"
+    },
+    {
+      "path": "public-site/assets/media/alfred-executive-briefing.wav",
+      "bytes": 1190970,
+      "sha256": "0c6ccd65b48e7ea4a650229eaa9da25d9aa5885649bc47702f78909a5c0dcae4"
+    },
+    {
+      "path": "public-site/assets/media/mr-sterling-ref.png",
+      "bytes": 764052,
+      "sha256": "4096e851d539406961defa030524074917a92c3bc646528d609a858d341cae5b"
+    },
+    {
+      "path": "public-site/assets/media/ms-lin-ref.png",
+      "bytes": 723248,
+      "sha256": "10960854b117c9e29b7a788a5878ea0e872cdfb2215a6da7794d8d9aa160ee88"
+    },
+    {
+      "path": "public-site/assets/media/pilot-ep1-16x9.mp4",
+      "bytes": 16003871,
+      "sha256": "29ef78249430d980f7f5e284d774800f9b7d419db58aeae9d30f031de7c9a023"
+    },
+    {
+      "path": "public-site/assets/media/pilot-ep1-9x16.mp4",
+      "bytes": 15977372,
+      "sha256": "a2de50344bad9746b994afe5d5be47adeee9f82f6ac759bbc36a0bddb5a50673"
+    },
+    {
+      "path": "public-site/assets/media/pilot-ep2-9x16.mp4",
+      "bytes": 8451297,
+      "sha256": "cfeaa4d97baa67ce94f52350c64e284055b5b529fa9edd94bf0a37c8583523a0"
+    },
+    {
+      "path": "public-site/assets/media/pilot-ep3-9x16.mp4",
+      "bytes": 8765711,
+      "sha256": "ef9e84c68801826e17c5b7bf3b8722c99d72dc0ca5cbc0c01e228eef06c04a3a"
+    },
+    {
+      "path": "public-site/assets/media/student-chloe-16x9.mp4",
+      "bytes": 10091313,
+      "sha256": "55df74cf6f7d448572652212bee16437ccc4ce456c0fc59dd1f2ed2dc17b3745"
+    },
+    {
+      "path": "public-site/assets/media/student-chloe-9x16.mp4",
+      "bytes": 9255708,
+      "sha256": "a7cb74646dc6545a2f54dfda40ea5901b3b7e8cd0b1d96188f50d4efeb5383d2"
+    },
+    {
+      "path": "public-site/assets/media/student-leo-16x9.mp4",
+      "bytes": 8372208,
+      "sha256": "432187c9faab7cd06b6a1c73ee6f97b8f4a1314622bcfe635f336ccca8f3627a"
+    },
+    {
+      "path": "public-site/assets/media/student-leo-9x16.mp4",
+      "bytes": 9312051,
+      "sha256": "bb458807ad0a15c9ae62d2326d52d29c6fb0fdd3616f9004dc581f273717a106"
+    },
+    {
+      "path": "public-site/assets/media/student-pd-drama-ep1-16x9.mp4",
+      "bytes": 11971869,
+      "sha256": "002cda9c04ac037ab661a3455a929a3725ea6f88da37c65376bee2ccba1cffd9"
+    },
+    {
+      "path": "public-site/assets/media/student-pd-drama-ep1-9x16.mp4",
+      "bytes": 12328601,
+      "sha256": "55fd5b8283d811965ff68a4238fa1c98112ff0ab2e47fdf3d9266405be70ef6c"
+    },
+    {
+      "path": "public-site/assets/media/zyk-ai-studio-showcase.png",
+      "bytes": 886183,
+      "sha256": "7937d8f2fb46bc36b713d57cee2c17223e39db45bbfebf8c49651259775c08db"
+    },
+    {
+      "path": "public-site/assets/media/zyk-social-banner.png",
+      "bytes": 771612,
+      "sha256": "f1ba0fd2666ecf44f0a72e743822878060887726f2b485dbf0ad2cad6033238e"
+    },
+    {
+      "path": "site/assets/img/mr_sterling_ref.png",
+      "bytes": 764052,
+      "sha256": "4096e851d539406961defa030524074917a92c3bc646528d609a858d341cae5b"
+    },
+    {
+      "path": "site/assets/img/ms_lin_ref.png",
+      "bytes": 723248,
+      "sha256": "10960854b117c9e29b7a788a5878ea0e872cdfb2215a6da7794d8d9aa160ee88"
+    },
+    {
+      "path": "site/assets/img/student_chloe_ref.png",
+      "bytes": 831633,
+      "sha256": "4d3cb5f8d530f21f045498664aa02a075ad816570f08d582391143e273814fc2"
+    },
+    {
+      "path": "site/assets/img/student_leo_ref.png",
+      "bytes": 956004,
+      "sha256": "656b19f23ef0082195d0055af64797d3a1a3a76ec8ee22893a243c6d33b9ea93"
+    },
+    {
+      "path": "site/assets/media/alfred-executive-briefing.wav",
+      "bytes": 1190970,
+      "sha256": "0c6ccd65b48e7ea4a650229eaa9da25d9aa5885649bc47702f78909a5c0dcae4"
+    },
+    {
+      "path": "site/assets/media/mr-sterling-ref.png",
+      "bytes": 764052,
+      "sha256": "4096e851d539406961defa030524074917a92c3bc646528d609a858d341cae5b"
+    },
+    {
+      "path": "site/assets/media/ms-lin-ref.png",
+      "bytes": 723248,
+      "sha256": "10960854b117c9e29b7a788a5878ea0e872cdfb2215a6da7794d8d9aa160ee88"
+    },
+    {
+      "path": "site/assets/media/pilot-ep1-16x9.mp4",
+      "bytes": 16003871,
+      "sha256": "29ef78249430d980f7f5e284d774800f9b7d419db58aeae9d30f031de7c9a023"
+    },
+    {
+      "path": "site/assets/media/pilot-ep1-9x16.mp4",
+      "bytes": 15977372,
+      "sha256": "a2de50344bad9746b994afe5d5be47adeee9f82f6ac759bbc36a0bddb5a50673"
+    },
+    {
+      "path": "site/assets/media/pilot-ep2-9x16.mp4",
+      "bytes": 8451297,
+      "sha256": "cfeaa4d97baa67ce94f52350c64e284055b5b529fa9edd94bf0a37c8583523a0"
+    },
+    {
+      "path": "site/assets/media/pilot-ep3-9x16.mp4",
+      "bytes": 8765711,
+      "sha256": "ef9e84c68801826e17c5b7bf3b8722c99d72dc0ca5cbc0c01e228eef06c04a3a"
+    },
+    {
+      "path": "site/assets/media/student-chloe-16x9.mp4",
+      "bytes": 10091313,
+      "sha256": "55df74cf6f7d448572652212bee16437ccc4ce456c0fc59dd1f2ed2dc17b3745"
+    },
+    {
+      "path": "site/assets/media/student-chloe-9x16.mp4",
+      "bytes": 9255708,
+      "sha256": "a7cb74646dc6545a2f54dfda40ea5901b3b7e8cd0b1d96188f50d4efeb5383d2"
+    },
+    {
+      "path": "site/assets/media/student-leo-16x9.mp4",
+      "bytes": 8372208,
+      "sha256": "432187c9faab7cd06b6a1c73ee6f97b8f4a1314622bcfe635f336ccca8f3627a"
+    },
+    {
+      "path": "site/assets/media/student-leo-9x16.mp4",
+      "bytes": 9312051,
+      "sha256": "bb458807ad0a15c9ae62d2326d52d29c6fb0fdd3616f9004dc581f273717a106"
+    },
+    {
+      "path": "site/assets/media/student-pd-drama-ep1-16x9.mp4",
+      "bytes": 11971869,
+      "sha256": "002cda9c04ac037ab661a3455a929a3725ea6f88da37c65376bee2ccba1cffd9"
+    },
+    {
+      "path": "site/assets/media/student-pd-drama-ep1-9x16.mp4",
+      "bytes": 12328601,
+      "sha256": "55fd5b8283d811965ff68a4238fa1c98112ff0ab2e47fdf3d9266405be70ef6c"
+    },
+    {
+      "path": "site/assets/media/zyk-ai-studio-showcase.png",
+      "bytes": 886183,
+      "sha256": "7937d8f2fb46bc36b713d57cee2c17223e39db45bbfebf8c49651259775c08db"
+    },
+    {
+      "path": "site/assets/media/zyk-social-banner.png",
+      "bytes": 771612,
+      "sha256": "f1ba0fd2666ecf44f0a72e743822878060887726f2b485dbf0ad2cad6033238e"
+    }
+  ]
+}
