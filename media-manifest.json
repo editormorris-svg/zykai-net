@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-11-08T12:33:10.176140+00:00",
+  "generated_utc": "2026-11-08T12:47:25.261438+00:00",
   "policy": "ops/FILE-SYNC-AND-VAULT-AIRGAP-PROTOCOL-2026-11-07.md section 2b",
   "note": "Payloads are release assets (see MEDIA_RELEASE_TAG); verify sha256 before re-provisioning.",
   "source": {
     "kind": "dir",
     "dir": "public-site/assets"
   },
-  "count": 22,
-  "total_bytes": 142194957,
+  "count": 23,
+  "total_bytes": 150850691,
   "files": [
     {
       "path": "public-site/assets/img/mr_sterling_ref.png",
@@ -78,6 +78,11 @@
       "path": "public-site/assets/media/pilot-ep6-9x16.mp4",
       "bytes": 8840673,
       "sha256": "2b9054b32ec8839d24ab637b8eeba682a964b13c54dd4b0d84dc4693c70e1866"
+    },
+    {
+      "path": "public-site/assets/media/pilot-ep7-9x16.mp4",
+      "bytes": 8655734,
+      "sha256": "feb8725c70e5e8e1a5af8a2bad3f631a454af9ca5bc75aefc3765dc05d112d1d"
     },
     {
       "path": "public-site/assets/media/student-chloe-16x9.mp4",
