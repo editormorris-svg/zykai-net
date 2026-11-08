@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-11-08T13:47:06.385939+00:00",
+  "generated_utc": "2026-11-08T13:50:03.959032+00:00",
   "policy": "ops/FILE-SYNC-AND-VAULT-AIRGAP-PROTOCOL-2026-11-07.md section 2b",
   "note": "Payloads are release assets (see MEDIA_RELEASE_TAG); verify sha256 before re-provisioning.",
   "source": {
     "kind": "dir",
     "dir": "public-site/assets"
   },
-  "count": 25,
-  "total_bytes": 167720759,
+  "count": 26,
+  "total_bytes": 176294983,
   "files": [
     {
       "path": "public-site/assets/img/mr_sterling_ref.png",
@@ -53,6 +53,11 @@
       "path": "public-site/assets/media/pilot-ep1-9x16.mp4",
       "bytes": 15977372,
       "sha256": "a2de50344bad9746b994afe5d5be47adeee9f82f6ac759bbc36a0bddb5a50673"
+    },
+    {
+      "path": "public-site/assets/media/pilot-ep10-9x16.mp4",
+      "bytes": 8574224,
+      "sha256": "a4645359f3c811c6f767781332db0bbd7e94379ade96e8c0c160a15a9ed8ccee"
     },
     {
       "path": "public-site/assets/media/pilot-ep2-9x16.mp4",
