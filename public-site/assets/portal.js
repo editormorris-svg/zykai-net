@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (wcBtn) {
       const subj = `WeChat Pay / Alipay Activation [¥${rmb} RMB - ${tier.toUpperCase()}] - ${acctTag}`;
       const body = `Hello ZYKai Concierge,\n\nPlease send the WeChat Pay / Alipay RMB QR code to activate my portal membership:\n- Portal Account ID: ${acct ? acct.account_id : 'Pending Sign-Up'}\n- Name: ${acct ? acct.full_name : ''}\n- Email: ${acct ? acct.email : ''}\n- Selected Tier: ${tier.toUpperCase()} (¥${rmb} RMB / $${usd} USD per month)\n- Official Referrer Locked: William Morris (NAS Jiaxing)\n`;
-      wcBtn.href = `mailto:1@0604.ai?cc=aiclub@zykai.net&subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
+      wcBtn.href = `mailto:1@zykai.net?cc=aiclub@zykai.net&subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
     }
   };
 
