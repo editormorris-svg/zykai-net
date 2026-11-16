@@ -85,5 +85,29 @@ class PresenceTests(unittest.TestCase):
                 self.assertEqual(page.count('hreflang='), 4)
 
 
+    def test_careers_navigation_all_languages_and_idempotence(self):
+        for lang, label in module.CAREERS_NAV_LABELS.items():
+            with self.subTest(language=lang):
+                source = '<header><nav class="links"><a href="platform.html">Platform</a><a href="contact.html">Contact</a></nav></header>'
+                updated = module.ensure_careers_navigation(source, Path(lang) / 'platform.html')
+                self.assertIn('<a href="referral.html">' + label + '</a>', updated)
+                self.assertLess(updated.index('href="referral.html"'), updated.index('href="contact.html"'))
+                self.assertEqual(module.ensure_careers_navigation(updated, Path(lang) / 'platform.html'), updated)
+                existing = '<nav class="links"><a class="active" href="referral.html">Existing</a></nav>'
+                self.assertEqual(module.ensure_careers_navigation(existing, Path(lang) / 'referral.html'), existing)
+
+    def test_careers_navigation_in_every_authored_page(self):
+        for lang in module.CAREERS_NAV_LABELS:
+            for page in (ROOT / 'public-site' / lang).glob('*.html'):
+                source = page.read_text(encoding='utf-8')
+                if '<nav class="links">' not in source:
+                    continue
+                updated = module.ensure_careers_navigation(source, Path(lang) / page.name)
+                with self.subTest(page=str(page)):
+                    self.assertIn('href="referral.html"', updated)
+                    self.assertEqual(updated.count('href="referral.html"') >= 1, True)
+
+
+
 if __name__ == '__main__':
     unittest.main()
