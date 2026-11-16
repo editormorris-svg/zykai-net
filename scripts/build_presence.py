@@ -110,9 +110,39 @@ def channel_page(template, lang, profiles):
     return result
 
 
+CAREERS_NAV_LABELS = {
+    'en': 'Careers & Jobs',
+    'zh-cn': '招聘与内推',
+    'zh-hk': '招聘與內推',
+}
+
+
+def ensure_careers_navigation(document, relative):
+    """Add the careers link to every localised page with a top navigation.
+
+    Existing job/referral pages already have this link and must not get
+    a duplicate. Insert before Contact so desktop and cloned mobile
+    navigation menus show it in a predictable location.
+    """
+    if len(relative.parts) != 2 or relative.parts[0] not in CAREERS_NAV_LABELS:
+        return document
+    match = re.search(r'<nav class="links">(.*?)</nav>', document, flags=re.I | re.S)
+    if not match:
+        return document
+    links = match.group(1)
+    if re.search(r'\bhref=["\x27]referral\.html["\x27]', links, flags=re.I):
+        return document
+    contact = re.search(r'<a\b[^>]*\bhref=["\x27]contact\.html["\x27]', links, flags=re.I)
+    position = contact.start() if contact else len(links)
+    anchor = '<a href="referral.html">' + CAREERS_NAV_LABELS[relative.parts[0]] + '</a>'
+    updated = links[:position] + anchor + links[position:]
+    return document[:match.start(1)] + updated + document[match.end(1):]
+
+
 def enrich(document, relative, config, site):
     # Work only on the build output: preserve every authored source page.
     document = re.sub(r'<!-- ZYK PRESENCE START -->.*?<!-- ZYK PRESENCE END -->', '', document, flags=re.S)
+    document = ensure_careers_navigation(document, relative)
     url = DOMAIN + '/' + relative.as_posix()
     if relative.as_posix() == 'index.html':
         url = DOMAIN + '/'
