@@ -1,0 +1,322 @@
+{
+  "generated_utc": "2026-11-17T14:55:36.769219+00:00",
+  "gate_set": "A-G (ZYK_MEDIA_PRODUCTION_ROADMAP v1.1 §4 / v1.2 §4)",
+  "assets": [
+    {
+      "asset": "pilot-ep1-9x16.mp4",
+      "verdict": "PENDING_REVIEW",
+      "gates": [
+        {
+          "gate": "A",
+          "status": "pass",
+          "detail": "manifest size+sha256 match",
+          "evidence": {
+            "sha256": "a2de50344bad9746b994afe5d5be47adeee9f82f6ac759bbc36a0bddb5a50673",
+            "bytes": 15977372
+          }
+        },
+        {
+          "gate": "B",
+          "status": "pass",
+          "detail": "ffprobe valid + full decode clean",
+          "evidence": {
+            "codec": "h264",
+            "width": 1080,
+            "height": 1920,
+            "fps": 30.0,
+            "duration": "44.433333",
+            "audio_samples": "44.241859"
+          }
+        },
+        {
+          "gate": "C",
+          "status": "pass",
+          "detail": "no cross-asset duplicate footage across 12 sampled frames",
+          "evidence": {}
+        },
+        {
+          "gate": "D",
+          "status": "pending",
+          "detail": "content/narrative accuracy and lip-sync require human or vision review",
+          "evidence": {
+            "note": "not auto-decidable; do not treat as pass"
+          }
+        },
+        {
+          "gate": "E",
+          "status": "pass",
+          "detail": "A/V sync, loudness and silence within tolerance",
+          "evidence": {
+            "video_dur": 44.433,
+            "audio_dur": 44.242,
+            "integrated_lufs": -20.0,
+            "true_peak_dbfs": -6.9,
+            "silences_ge_2s": 0
+          }
+        },
+        {
+          "gate": "F",
+          "status": "pending",
+          "detail": "aspect + decode OK; disclosure undetermined (no CJK OCR pack to read a zh label)",
+          "evidence": {
+            "width": 1080,
+            "height": 1920,
+            "sha256": "a2de50344bad9746b994afe5d5be47adeee9f82f6ac759bbc36a0bddb5a50673",
+            "bytes": 15977372,
+            "ocr_excerpt": "ZYKAI.NET - GLOBAL SCHOOL JOB PORTAL\n\nAXING & 13 SISTER SCHOOLS HIRING\n\nSK\n\nIA HIRING\n\nMR. STERLING - NOR\n“Open teaching & leadership jobs at NAS Jiaxin...\ng, 13 sister schools & worldwide.”\n\n“BF MBRE A Be? Beek, SH\nSPATE Se PERRIER ! ”\n\nNAS Jiaxing, Sister Schools & Global Jobs (Ref: William Morris) > zykai.net\n\nZYKAI.NET - GLOBAL SCHOOL JOB PORTAL\nFREE PORTAL SIGN-UP - REF: WILLIAM MORRIS\n\nMS. L",
+            "ocr_langs": [
+              "eng",
+              "osd"
+            ]
+          }
+        },
+        {
+          "gate": "G",
+          "status": "pass",
+          "detail": "release asset present + served at https://github.com/editormorris-svg/zykai-net/releases/download/media-v20261108/pilot-ep1-9x16.mp4",
+          "evidence": {
+            "url": "https://github.com/editormorris-svg/zykai-net/releases/download/media-v20261108/pilot-ep1-9x16.mp4",
+            "bytes": 15977372
+          }
+        }
+      ]
+    },
+    {
+      "asset": "student-leo-9x16.mp4",
+      "verdict": "BLOCKED",
+      "gates": [
+        {
+          "gate": "A",
+          "status": "pass",
+          "detail": "manifest size+sha256 match",
+          "evidence": {
+            "sha256": "bb458807ad0a15c9ae62d2326d52d29c6fb0fdd3616f9004dc581f273717a106",
+            "bytes": 9312051
+          }
+        },
+        {
+          "gate": "B",
+          "status": "pass",
+          "detail": "ffprobe valid + full decode clean",
+          "evidence": {
+            "codec": "h264",
+            "width": 1080,
+            "height": 1920,
+            "fps": 30.0,
+            "duration": "27.733333",
+            "audio_samples": "27.593651"
+          }
+        },
+        {
+          "gate": "C",
+          "status": "pass",
+          "detail": "no cross-asset duplicate footage across 12 sampled frames",
+          "evidence": {}
+        },
+        {
+          "gate": "D",
+          "status": "pending",
+          "detail": "content/narrative accuracy and lip-sync require human or vision review",
+          "evidence": {
+            "note": "not auto-decidable; do not treat as pass"
+          }
+        },
+        {
+          "gate": "E",
+          "status": "fail",
+          "detail": "loudness -21.9 LUFS outside -14±6.0",
+          "evidence": {
+            "video_dur": 27.733,
+            "audio_dur": 27.594,
+            "integrated_lufs": -21.9,
+            "true_peak_dbfs": -5.5,
+            "silences_ge_2s": 0
+          }
+        },
+        {
+          "gate": "F",
+          "status": "pending",
+          "detail": "aspect + decode OK; disclosure undetermined (no CJK OCR pack to read a zh label)",
+          "evidence": {
+            "width": 1080,
+            "height": 1920,
+            "sha256": "bb458807ad0a15c9ae62d2326d52d29c6fb0fdd3616f9004dc581f273717a106",
+            "bytes": 9312051,
+            "ocr_excerpt": "ZYKAI STUDENT LAB - RESPONSIBLE Al & TIER UPGRADE STORY\niE\n\n“Stop using Al as a ghostwriter! Watch verifie...\nd Macbeth Hybrid Cinema on our Free Tier first...\n\n“AUDA SIC | FCA ZYK IP ROME\nWe (BRA) kaw, BRAUE ”\n\nFree 0-Quota — Basic ($9.90) — Plus ($29) — Pro Pod ($79) - zykai.net\n\nZYKAI STUDENT LAB - RESPONSIBLE Al & TIER UPGRADE STORY\nMY UPGRADE: FREE —> BASIC > PLUS — PRO POD\n\nLEO ZHANG - BASIC",
+            "ocr_langs": [
+              "eng",
+              "osd"
+            ]
+          }
+        },
+        {
+          "gate": "G",
+          "status": "pass",
+          "detail": "release asset present + served at https://github.com/editormorris-svg/zykai-net/releases/download/media-v20261108/student-leo-9x16.mp4",
+          "evidence": {
+            "url": "https://github.com/editormorris-svg/zykai-net/releases/download/media-v20261108/student-leo-9x16.mp4",
+            "bytes": 9312051
+          }
+        }
+      ]
+    },
+    {
+      "asset": "student-chloe-9x16.mp4",
+      "verdict": "PENDING_REVIEW",
+      "gates": [
+        {
+          "gate": "A",
+          "status": "pass",
+          "detail": "manifest size+sha256 match",
+          "evidence": {
+            "sha256": "a7cb74646dc6545a2f54dfda40ea5901b3b7e8cd0b1d96188f50d4efeb5383d2",
+            "bytes": 9255708
+          }
+        },
+        {
+          "gate": "B",
+          "status": "pass",
+          "detail": "ffprobe valid + full decode clean",
+          "evidence": {
+            "codec": "h264",
+            "width": 1080,
+            "height": 1920,
+            "fps": 30.0,
+            "duration": "28.933333",
+            "audio_samples": "28.787982"
+          }
+        },
+        {
+          "gate": "C",
+          "status": "pass",
+          "detail": "no cross-asset duplicate footage across 12 sampled frames",
+          "evidence": {}
+        },
+        {
+          "gate": "D",
+          "status": "pending",
+          "detail": "content/narrative accuracy and lip-sync require human or vision review",
+          "evidence": {
+            "note": "not auto-decidable; do not treat as pass"
+          }
+        },
+        {
+          "gate": "E",
+          "status": "pass",
+          "detail": "A/V sync, loudness and silence within tolerance",
+          "evidence": {
+            "video_dur": 28.933,
+            "audio_dur": 28.788,
+            "integrated_lufs": -19.5,
+            "true_peak_dbfs": -6.6,
+            "silences_ge_2s": 0
+          }
+        },
+        {
+          "gate": "F",
+          "status": "pending",
+          "detail": "aspect + decode OK; disclosure undetermined (no CJK OCR pack to read a zh label)",
+          "evidence": {
+            "width": 1080,
+            "height": 1920,
+            "sha256": "a7cb74646dc6545a2f54dfda40ea5901b3b7e8cd0b1d96188f50d4efeb5383d2",
+            "bytes": 9255708,
+            "ocr_excerpt": "ZYKAI STUDENT LAB « ACADEMIC INTEGRITY & OXBRIDGE PREP\nPD TIP: USE Al AS YOUR ’RED-TEAM EXAMINER’\n\nMS. LIN XIA (443) - BILINGUAL INNOVATION DIRECTOR\n\n“Never ask Al to write your sentence—command i...\nt to attack your thesis like an Oxford tutor!”\n\n“RAIA S AF | FA ZYK PZB\nHfatert’, LLAMR Fal SP PENI ae\n\nRed-Team Critic & Oxbridge Interview Simulator — zykai.net/en/portal.html\n\nZYKAI STUDENT LAB « A",
+            "ocr_langs": [
+              "eng",
+              "osd"
+            ]
+          }
+        },
+        {
+          "gate": "G",
+          "status": "pass",
+          "detail": "release asset present + served at https://github.com/editormorris-svg/zykai-net/releases/download/media-v20261108/student-chloe-9x16.mp4",
+          "evidence": {
+            "url": "https://github.com/editormorris-svg/zykai-net/releases/download/media-v20261108/student-chloe-9x16.mp4",
+            "bytes": 9255708
+          }
+        }
+      ]
+    },
+    {
+      "asset": "student-pd-drama-ep1-9x16.mp4",
+      "verdict": "PENDING_REVIEW",
+      "gates": [
+        {
+          "gate": "A",
+          "status": "pass",
+          "detail": "manifest size+sha256 match",
+          "evidence": {
+            "sha256": "55fd5b8283d811965ff68a4238fa1c98112ff0ab2e47fdf3d9266405be70ef6c",
+            "bytes": 12328601
+          }
+        },
+        {
+          "gate": "B",
+          "status": "pass",
+          "detail": "ffprobe valid + full decode clean",
+          "evidence": {
+            "codec": "h264",
+            "width": 1080,
+            "height": 1920,
+            "fps": 30.0,
+            "duration": "38.066667",
+            "audio_samples": "37.930703"
+          }
+        },
+        {
+          "gate": "C",
+          "status": "pass",
+          "detail": "no cross-asset duplicate footage across 12 sampled frames",
+          "evidence": {}
+        },
+        {
+          "gate": "D",
+          "status": "pending",
+          "detail": "content/narrative accuracy and lip-sync require human or vision review",
+          "evidence": {
+            "note": "not auto-decidable; do not treat as pass"
+          }
+        },
+        {
+          "gate": "E",
+          "status": "pass",
+          "detail": "A/V sync, loudness and silence within tolerance",
+          "evidence": {
+            "video_dur": 38.067,
+            "audio_dur": 37.931,
+            "integrated_lufs": -19.9,
+            "true_peak_dbfs": -6.6,
+            "silences_ge_2s": 0
+          }
+        },
+        {
+          "gate": "F",
+          "status": "pending",
+          "detail": "aspect + decode OK; disclosure undetermined (no CJK OCR pack to read a zh label)",
+          "evidence": {
+            "width": 1080,
+            "height": 1920,
+            "sha256": "55fd5b8283d811965ff68a4238fa1c98112ff0ab2e47fdf3d9266405be70ef6c",
+            "bytes": 12328601,
+            "ocr_excerpt": "ZYKAI CAMPUS DRAMA & SCHOOL PD SERIES - EPISODE #1\n\nMR. STERLING - H\n\n“In my classroom, Al is your sparring partner,...\nnever your replacement. Defend it at the boar...\n\nTERAIRE LE, AEN BA, AREER A.\nAEA Tate A RBI Ser Sie |”\n\nUse in Staff PD, Assemblies & Student Al Clubs > zykai.net/en/portal.html\n\nZYKAI CAMPUS DRAMA & SCHOOL PD SERIES - EPISODE #1\nSCENE 4: START FREE AT ZYKAI.NET PORTAL\n\nMS. LIN",
+            "ocr_langs": [
+              "eng",
+              "osd"
+            ]
+          }
+        },
+        {
+          "gate": "G",
+          "status": "pass",
+          "detail": "release asset present + served at https://github.com/editormorris-svg/zykai-net/releases/download/media-v20261108/student-pd-drama-ep1-9x16.mp4",
+          "evidence": {
+            "url": "https://github.com/editormorris-svg/zykai-net/releases/download/media-v20261108/student-pd-drama-ep1-9x16.mp4",
+            "bytes": 12328601
+          }
+        }
+      ]
+    }
+  ]
+}
