@@ -25,14 +25,24 @@ PRIVATE_KEYS = (
     'last_internal_bulletin_ingest',
 )
 
-# Public HTML must never carry the bonus table or the internal program name.
+# Public HTML must never carry the bonus table, the internal program name (in any
+# hyphen/spacing variant) or a burned-in referral award figure.
 FORBIDDEN_PHRASES = (
     'Staff Get Staff Referral Bonus',
+    'Staff-Get-Staff',
+    'Staff Get Staff',
     'referral-bonus',
     'Referral Bonus Policy',
+    'Up to ¥12,000',
+    '最高 ¥12,000',
+    '伯乐奖金',
     '内推奖励标准',
     '內推獎勵標準',
 )
+
+# The internal program name must also never appear inside the public catalog,
+# including inside nested values of otherwise-public keys.
+FORBIDDEN_CATALOG_SUBSTRINGS = ('Staff-Get-Staff', 'Staff Get Staff', 'referral_bonus')
 
 # Internal HR personal addresses (school/group staff), never published.
 HR_ADDRESS = re.compile(r'[a-z][a-z0-9._-]*@(?:nacis|nordanglia)[a-z0-9.-]*\.(?:cn|com)', re.I)
@@ -49,11 +59,20 @@ class ReferralPrivacyTests(unittest.TestCase):
     def test_public_html_has_no_bonus_program(self):
         pages = sorted(PUBLIC_SITE.glob('*/*.html'))
         self.assertGreater(len(pages), 0, 'no public HTML pages found')
-        for page in pages:
+        # site.js carries burned-in on-screen labels (epLabel), so scan it too.
+        assets = [PUBLIC_SITE / 'assets' / 'site.js']
+        for page in [*pages, *[a for a in assets if a.is_file()]]:
             text = page.read_text(encoding='utf-8')
             for phrase in FORBIDDEN_PHRASES:
                 with self.subTest(page=page.name, phrase=phrase):
                     self.assertNotIn(phrase, text, f'{page} still publishes the internal referral bonus program')
+
+    def test_public_catalog_has_no_program_name_nested(self):
+        catalog = json.loads(PUBLIC_CATALOG.read_text(encoding='utf-8'))
+        blob = json.dumps(catalog, ensure_ascii=False)
+        for token in FORBIDDEN_CATALOG_SUBSTRINGS:
+            with self.subTest(token=token):
+                self.assertNotIn(token, blob, f'public catalog leaks {token!r} in a nested value')
 
     def test_no_internal_hr_addresses_published(self):
         targets = [PUBLIC_CATALOG, *sorted(PUBLIC_SITE.glob('*/*.html'))]
