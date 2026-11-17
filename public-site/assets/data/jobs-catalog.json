@@ -8359,29 +8359,5 @@
     }
   ],
   "last_weekly_research_at": "2026-11-17T04:30:00+08:00",
-  "research_status": "Curated NASJX (8 verified roles), 4 NAE China regional clusters (13 sister schools), and global NAE/IB/British international school feeds.",
-  "internal_bulletin": {
-    "source": "NAE China Region Internal Referral Program · 17 Nov 2026",
-    "ingested_at": "2026-11-17T13:40:00+08:00",
-    "from_account": "2026wm@gmail.com (forwarded from william.morris@nasjiaxing.cn)",
-    "teaching_roles_parsed": 163,
-    "nonteaching_roles_parsed": 99,
-    "published_open_or_rolling": 250,
-    "expired_excluded": 12,
-    "china_priority_roles": 17,
-    "hot_jobs_listed_17nov": 34,
-    "hot_jobs_already_in_catalog": 22,
-    "hot_jobs_newly_added": 12,
-    "note": "Weekly bulletin ingest retained; the 17 Nov China-region referral digest added 12 China roles and the referral bonus schedule. Internal HR contact emails are retained only in ops intake records, not published."
-  },
-  "last_internal_bulletin_ingest": "2026-11-17T13:40:00+08:00",
-  "last_referral_program_ingest": "2026-11-17T13:40:00+08:00",
-  "referral_bonus_publication_policy": {
-    "directive": "NEVER PUBLISH",
-    "owner_directive_at": "2026-11-17T18:40:00+08:00",
-    "rule": "The NAE Staff Get Staff referral bonus schedule is ZYKai's own commercial interest. ZYKai helps candidates find jobs, connects them to employers and collects the referral bonus, consultancy/membership fees and add-on services. Bonus amounts, the internal policy PDF and internal HR contacts are NEVER published or mentioned on zykai.net or any public channel.",
-    "public_route_only": "Public pages state the referral route and referrer attribution (William Morris, NAS Jiaxing) only; no figures, no program naming.",
-    "enforced_by": "build_zykai_portal_and_jobs.py :: PRIVATE_CATALOG_KEYS (stripped from public catalog copy)",
-    "expansion_plan": "Start with NAS sister schools in China, then all NAS schools worldwide, then any other school or entity offering a referral bonus; monetise via referral bonuses, consultancy fees, membership fees and add-on services."
-  }
+  "research_status": "Curated NASJX (8 verified roles), 4 NAE China regional clusters (13 sister schools), and global NAE/IB/British international school feeds."
 }
