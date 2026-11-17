@@ -8375,5 +8375,13 @@
     "note": "Weekly bulletin ingest retained; the 17 Nov China-region referral digest added 12 China roles and the referral bonus schedule. Internal HR contact emails are retained only in ops intake records, not published."
   },
   "last_internal_bulletin_ingest": "2026-11-17T13:40:00+08:00",
-  "last_referral_program_ingest": "2026-11-17T13:40:00+08:00"
+  "last_referral_program_ingest": "2026-11-17T13:40:00+08:00",
+  "referral_bonus_publication_policy": {
+    "directive": "NEVER PUBLISH",
+    "owner_directive_at": "2026-11-17T18:40:00+08:00",
+    "rule": "The NAE Staff Get Staff referral bonus schedule is ZYKai's own commercial interest. ZYKai helps candidates find jobs, connects them to employers and collects the referral bonus, consultancy/membership fees and add-on services. Bonus amounts, the internal policy PDF and internal HR contacts are NEVER published or mentioned on zykai.net or any public channel.",
+    "public_route_only": "Public pages state the referral route and referrer attribution (William Morris, NAS Jiaxing) only; no figures, no program naming.",
+    "enforced_by": "build_zykai_portal_and_jobs.py :: PRIVATE_CATALOG_KEYS (stripped from public catalog copy)",
+    "expansion_plan": "Start with NAS sister schools in China, then all NAS schools worldwide, then any other school or entity offering a referral bonus; monetise via referral bonuses, consultancy fees, membership fees and add-on services."
+  }
 }
