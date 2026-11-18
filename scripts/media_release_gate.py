@@ -442,6 +442,12 @@ def gate_g(asset: str, path: Path) -> GateResult:
     # Roadmap Gate G asks for "uploaded bytes/hash where possible". GitHub's asset API
     # exposes size but not a digest, so verify the published byte length against the
     # local master. A mismatch means the served rendition is not the reviewed master.
+    if not path.is_file():
+        # Fail closed: a master that is not on disk cannot be compared, and crashing
+        # here previously hid the real reason a staging run produced no verdict.
+        return GateResult("G", "fail",
+                          f"local master {asset} not found at {path}; cannot verify published bytes",
+                          {"url": url, "local_path": str(path)})
     local_bytes = path.stat().st_size
     try:
         assets = json.loads(r.stdout).get("assets", [])

@@ -119,16 +119,23 @@ def main() -> int:
     ap.add_argument("--assets", nargs="*", default=None)
     ap.add_argument("--out", default="/tmp/zyk-remediated",
                     help="staging directory (never the served media dir)")
+    ap.add_argument("--src-dir", default=None,
+                    help="read masters from here instead of the served media dir "
+                         "(e.g. a fresh render staging dir)")
     args = ap.parse_args()
 
     assets = args.assets or list(DEFAULT_ASSETS)
+    src_dir = Path(args.src_dir) if args.src_dir else MEDIA
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     results = []
     for a in assets:
-        src = MEDIA / a
+        src = src_dir / a
         if not src.is_file():
             print(f"SKIP  {a}: not on disk")
+            continue
+        if src.resolve() in {out.resolve() / a}:
+            print(f"SKIP  {a}: source and destination are the same file")
             continue
         dst = out / a
         info = remediate(src, dst)
