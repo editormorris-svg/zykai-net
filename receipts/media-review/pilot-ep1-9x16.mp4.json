@@ -1,0 +1,8 @@
+{
+  "asset": "pilot-ep1-9x16.mp4",
+  "sha256": "a4469a91366e4fdc8a85d03dbd4fd197968fb0002da3c74ef6aad1788c9e4579",
+  "reviewer": "HIM (vision model) under owner authorisation",
+  "reviewed_utc": "2026-11-17T23:25:00Z",
+  "verdict": "fail",
+  "notes": "Frames sampled at 5/30/55/80%. AI-disclosure label present and readable in all frames (Gate F concern, satisfied). Blocker: burned-in English captions split mid-word with an inserted ellipsis in all four frames, e.g. 'A.../re students grading', 'Jiaxin.../g, 13 sister schools', and the CTA 'Willia.../m Morris' which breaks the founder's name. Root cause found and fixed at source in render-student-personas.py (render_9x16_segment sliced subtitles at fixed character offsets: sub_en_str[:46] / [46:92]); replaced with word-boundary wrap_caption(). These masters cannot be re-rendered because the Veo source clips (static10_*_1080p.mp4) are no longer on disk and the Veo lane is under an owner scope-lock to 2026-11-22. Minor: Mr. Sterling's role label differs between scenes; confirm intended. Minor: generative hand/tablet blur artifacts."
+}

@@ -1,0 +1,8 @@
+{
+  "asset": "student-pd-drama-ep1-9x16.mp4",
+  "sha256": "2d03181e3319bd7b89bf51117174ef4ff912d9121d653fdcdadd797a36764925",
+  "reviewer": "HIM (vision model) under owner authorisation",
+  "reviewed_utc": "2026-11-17T23:25:00Z",
+  "verdict": "fail",
+  "notes": "Frames sampled at 5/30/55/80%. AI-disclosure label present and readable in all frames. Blocker: English captions split mid-word with ellipsis in all four scenes ('prom.../pt', 'Po.../ds') and 'at the boar...' truncates the word 'board'; scene 2's Chinese caption cuts off mid-sentence ('...先自测第一章') with a malformed '门' glyph. Root cause fixed at source in render-student-personas.py (fixed-offset subtitle slicing replaced with word-boundary wrapping). Re-render blocked: Veo source clips absent, lane scope-locked to 2026-11-22. Minor generative blur on hands/pen; no structural face artifacts."
+}

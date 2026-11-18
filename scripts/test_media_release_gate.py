@@ -5,6 +5,7 @@ footage, wrong soundtrack and broken final output are all blocked; a correct ite
 passes." These tests exercise the deterministic gates against synthetic fixtures.
 """
 import importlib.util
+import json
 import shutil
 import subprocess
 import sys
@@ -24,14 +25,22 @@ spec.loader.exec_module(gate)
 
 
 def make_clip(dest: Path, seconds: float = 2.0, draw: str | None = None,
-              audio_db: float = -14.0, size: str = '1080x1920') -> None:
+              audio_db: float = -14.0, size: str = '1080x1920',
+              pattern: str = 'testsrc') -> None:
+    # A clean background matters for OCR fixtures: testsrc's coloured noise defeats
+    # tesseract, which would make the disclosure gate look broken when it is not.
+    if pattern == 'color':
+        src = f'color=c=black:size={size}:rate=30:duration={seconds}'
+    else:
+        src = f'{pattern}=size={size}:rate=30:duration={seconds}'
     vf = f'scale={size}'
     if draw:
         vf += (",drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
-               f":text='{draw}':fontcolor=white:fontsize=48:x=40:y=40")
+               f":text='{draw}':fontcolor=white:fontsize=64:x=(w-text_w)/2:y=200"
+               ":box=1:boxcolor=black@0.6:boxborderw=10")
     subprocess.run([
         'ffmpeg', '-y', '-v', 'error',
-        '-f', 'lavfi', '-i', f'testsrc=size={size}:rate=30:duration={seconds}',
+        '-f', 'lavfi', '-i', src,
         '-f', 'lavfi', '-i', f'sine=frequency=440:duration={seconds}',
         '-vf', vf, '-af', f'volume={audio_db}dB',
         '-c:v', 'libx264', '-preset', 'ultrafast', '-crf', '28',
@@ -45,10 +54,19 @@ class GateRegressionTests(unittest.TestCase):
     def setUpClass(cls):
         cls.tmp = Path(tempfile.mkdtemp(prefix='zyk-gate-test-'))
         cls.valid = cls.tmp / 'valid.mp4'
-        make_clip(cls.valid, draw='AI-Assisted Visuals')
+        make_clip(cls.valid, draw='AI-Assisted Visuals', pattern='color')
         cls.truncated = cls.tmp / 'truncated.mp4'
         data = cls.valid.read_bytes()
         cls.truncated.write_bytes(data[: len(data) // 2])  # valid header, cut payload
+        # Gate C skips near-uniform frames (std < LOW_INFO_STD), so recycled-footage
+        # fixtures need real structure. smptehdbars is static and structured; two
+        # clips built from it are byte-different but visually identical.
+        cls.dup_a = cls.tmp / 'dup_a.mp4'
+        cls.dup_b = cls.tmp / 'dup_b.mp4'
+        make_clip(cls.dup_a, pattern='smptehdbars')
+        make_clip(cls.dup_b, pattern='smptehdbars', audio_db=-18.0)
+        cls.distinct = cls.tmp / 'distinct.mp4'
+        make_clip(cls.distinct, pattern='testsrc2')
 
     def test_gate_b_passes_valid_clip(self):
         res = gate.gate_b(self.valid)
@@ -65,9 +83,7 @@ class GateRegressionTests(unittest.TestCase):
 
     def test_gate_f_passes_when_disclosure_present(self):
         res = gate.gate_f(self.valid, {}, 'valid.mp4')
-        self.assertIn(res.status, {'pass', 'pending'}, res.detail)
-        if res.status == 'pending':
-            self.assertIn('disclosure undetermined', res.detail)
+        self.assertEqual(res.status, 'pass', res.detail)
 
     def test_gate_e_flags_loudness_drift(self):
         quiet = self.tmp / 'quiet.mp4'
@@ -78,25 +94,19 @@ class GateRegressionTests(unittest.TestCase):
         self.assertTrue(res.status == 'fail' and 'loudness' in details, details)
 
     def test_gate_c_flags_duplicate_footage_across_assets(self):
-        hashes = gate.sample_dhashes(self.valid)
+        hashes = gate.sample_dhashes(self.dup_a)
         self.assertTrue(hashes, 'expected sampled dHashes')
-        shared = {'a.mp4': hashes, 'b.mp4': hashes}
+        self.assertTrue(any(h['std'] >= gate.LOW_INFO_STD for h in hashes),
+                        'duplicate fixture must carry enough structure to be compared')
+        shared = {'a.mp4': hashes, 'b.mp4': gate.sample_dhashes(self.dup_b)}
         res = gate.gate_c('a.mp4', shared)
         self.assertEqual(res.status, 'fail', res.detail)
 
     def test_gate_c_passes_for_distinct_assets(self):
         # dHash is structural, so a recolour keeps the same hash. The distinct
         # fixture must differ in structure (different lavfi pattern).
-        other = self.tmp / 'other.mp4'
-        subprocess.run([
-            'ffmpeg', '-y', '-v', 'error',
-            '-f', 'lavfi', '-i', 'smptehdbars=size=1080x1920:rate=30:duration=2',
-            '-f', 'lavfi', '-i', 'sine=frequency=330:duration=2',
-            '-c:v', 'libx264', '-preset', 'ultrafast', '-crf', '28',
-            '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-shortest', str(other),
-        ], capture_output=True)
-        hashes = {'a.mp4': gate.sample_dhashes(self.valid),
-                  'b.mp4': gate.sample_dhashes(other)}
+        hashes = {'a.mp4': gate.sample_dhashes(self.dup_a),
+                  'b.mp4': gate.sample_dhashes(self.distinct)}
         res = gate.gate_c('a.mp4', hashes)
         self.assertEqual(res.status, 'pass', res.detail)
 
@@ -104,6 +114,53 @@ class GateRegressionTests(unittest.TestCase):
         res = gate.gate_d(self.valid)
         self.assertEqual(res.status, 'pending',
                          'Gate D cannot be auto-decided without human/vision review')
+
+    def test_disclosure_detection_tolerates_ocr_noise(self):
+        """Tesseract reads 'AI' as 'Al'/'A1' and spaces out CJK; a real label must still pass."""
+        for noisy in ('AI-Assisted Visuals & Voice', 'Al-Assisted Visuals',
+                      'A1-Generated', 'Ai 生成 合成 内 容', '人工智能生成合成内容',
+                      'AI生成'):
+            self.assertTrue(gate._has_disclosure(noisy), f'missed disclosure in {noisy!r}')
+
+    def test_disclosure_absent_on_unlabelled_text(self):
+        for clean in ('ZYKAI STUDENT LAB', 'Stop using a bot as a ghostwriter',
+                      'LeO ZHANG - YEAR 11'):
+            self.assertFalse(gate._has_disclosure(clean), f'false positive on {clean!r}')
+
+    def test_gate_g_fails_on_published_byte_mismatch(self):
+        """Gate G must compare published bytes, not just presence."""
+        real_run = gate._run
+
+        def fake_run(cmd, text=True):
+            if cmd[:2] == ['gh', 'release']:
+                return subprocess.CompletedProcess(cmd, 0, json.dumps({
+                    'assets': [{'name': 'x.mp4', 'size': 999}]}), '')
+            return real_run(cmd, text=text)
+
+        gate._run = fake_run
+        try:
+            res = gate.gate_g('x.mp4', self.valid)
+        finally:
+            gate._run = real_run
+        self.assertEqual(res.status, 'fail', res.detail)
+        self.assertIn('published bytes', res.detail)
+
+    def test_gate_g_passes_when_published_bytes_match(self):
+        real_run = gate._run
+        size = self.valid.stat().st_size
+
+        def fake_run(cmd, text=True):
+            if cmd[:2] == ['gh', 'release']:
+                return subprocess.CompletedProcess(cmd, 0, json.dumps({
+                    'assets': [{'name': 'x.mp4', 'size': size}]}), '')
+            return real_run(cmd, text=text)
+
+        gate._run = fake_run
+        try:
+            res = gate.gate_g('x.mp4', self.valid)
+        finally:
+            gate._run = real_run
+        self.assertEqual(res.status, 'pass', res.detail)
 
     def test_receipt_verdict_is_fail_closed(self):
         rec = gate.AssetReceipt('x.mp4')

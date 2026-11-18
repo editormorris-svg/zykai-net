@@ -1,0 +1,8 @@
+{
+  "asset": "student-leo-9x16.mp4",
+  "sha256": "8bba82047301db4d74bb87ed297905b45e88f67b469e6e64b8cdaa6fbcfeefc1",
+  "reviewer": "HIM (vision model) under owner authorisation",
+  "reviewed_utc": "2026-11-17T23:25:00Z",
+  "verdict": "fail",
+  "notes": "Frames sampled at 5/30/55/80%. AI-disclosure label present and readable in all frames. Blocker: English captions split mid-word with ellipsis in every frame ('ess.../ay', 'verifie.../d', 'debugge.../r') and none of the quoted captions close their quotation mark. One frame shows a garbled Chinese character after 'ZYK' ('闩户' instead of '门户'). Root cause fixed at source in render-student-personas.py (fixed-offset subtitle slicing replaced with word-boundary wrapping); re-render blocked because Veo source clips are absent and the Veo lane is scope-locked to 2026-11-22. No structural face artifacts; minor motion softness."
+}

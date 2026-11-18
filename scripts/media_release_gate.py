@@ -42,6 +42,9 @@ ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_MEDIA = ROOT / "public-site" / "assets" / "media"
 MANIFEST = ROOT / "media-manifest.json"
 RECEIPT_DIR = ROOT / "receipts" / "media-release"
+# Recorded human/vision Gate D decisions, one JSON file per asset, bound to the
+# sha256 of the exact master reviewed. See gate_d() for the required shape.
+REVIEW_DIR = ROOT / "receipts" / "media-review"
 MEDIA_RELEASE_TAG = "media-v20261108"
 MEDIA_RELEASE_BASE = (
     "https://github.com/editormorris-svg/zykai-net/releases/download/" + MEDIA_RELEASE_TAG
@@ -64,7 +67,19 @@ EXPECTED_ASPECTS = {(1080, 1920), (1920, 1080)}
 EXPECTED_FPS = 30.0
 MAX_AV_DELTA_S = 0.35  # |video_dur - audio_dur| tolerance
 LOUDNESS_TOL_DB = 6.0  # tolerance around the -14 LUFS roadmap target
-AI_DISCLOSURE_TOKENS = ("AI生成", "AI-Assisted", "AI ASSISTED", "AI-Generated", "AI辅助")
+# OCR is unreliable on the glyph pair "AI": tesseract frequently returns "Al"/"A1",
+# and inserts spaces inside CJK runs ("AI生成合成内容" -> "Ai 生成 合成 内 容"). Matching raw
+# substrings therefore false-FAILS a correctly labelled master. Normalise whitespace and
+# tolerate the I/l/1 confusion, then match patterns.
+AI_DISCLOSURE_PATTERNS = (
+    r"a[il1]-?assisted",
+    r"a[il1]-?generated",
+    r"a[il1]辅助",
+    r"a[il1]生成",
+    r"生成合成",
+    r"合成内容",
+    r"人工智能生成",
+)
 
 
 def _run(cmd: list[str], text: bool = True) -> subprocess.CompletedProcess:
@@ -247,11 +262,43 @@ def gate_c(asset: str, all_hashes: dict[str, list[dict]]) -> GateResult:
     return GateResult("C", "pass", f"no cross-asset duplicate footage across {len(mine)} sampled frames")
 
 
-def gate_d(path: Path) -> GateResult:
-    # Scene/character/lip-sync/accuracy review needs human or vision-model judgement.
+def gate_d(path: Path, reviews: dict[str, dict] | None = None) -> GateResult:
+    """Content/narrative review: decidable only from a recorded human/vision verdict.
+
+    This gate never auto-passes. A decision must be recorded as
+    `receipts/media-review/<asset>.json`:
+
+        {"asset": "<name>.mp4", "sha256": "<full digest>",
+         "reviewer": "<who>", "reviewed_utc": "<iso8601>",
+         "verdict": "pass"|"fail", "notes": "..."}
+
+    The sha256 is mandatory and must equal the digest of the file on disk, so a
+    review cannot be carried over to a re-rendered master. Any deviation
+    (missing file, wrong hash, unknown verdict) keeps the gate `pending`.
+    """
+    digest = sha256_of(path) if path.is_file() else ""
+    entry = (reviews or {}).get(path.name)
+    if not entry:
+        return GateResult("D", "pending",
+                          "no recorded content review; needs human/vision judgement",
+                          {"sha256": digest,
+                           "note": "record a verdict in receipts/media-review/<asset>.json"})
+    ev = {"sha256": digest, "review_sha256": entry.get("sha256"),
+          "reviewer": entry.get("reviewer"), "reviewed_utc": entry.get("reviewed_utc"),
+          "notes": entry.get("notes", "")}
+    if entry.get("sha256") != digest:
+        return GateResult("D", "pending",
+                          "recorded review hash does not match this master; re-review required",
+                          ev)
+    verdict = str(entry.get("verdict", "")).lower()
+    if verdict == "pass":
+        return GateResult("D", "pass",
+                          f"content review passed by {entry.get('reviewer', 'reviewer')}", ev)
+    if verdict == "fail":
+        return GateResult("D", "fail",
+                          f"content review failed: {entry.get('notes', 'see review record')}", ev)
     return GateResult("D", "pending",
-                      "content/narrative accuracy and lip-sync require human or vision review",
-                      {"note": "not auto-decidable; do not treat as pass"})
+                      f"review record has unrecognised verdict {verdict!r}", ev)
 
 
 def gate_e(path: Path, meta: dict) -> GateResult:
@@ -319,7 +366,7 @@ def gate_f(path: Path, man: dict[str, dict], asset: str) -> GateResult:
     langs = _ocr_langs()
     ev["ocr_langs"] = sorted(langs)
     has_cjk = any(l.startswith("chi") for l in langs)
-    if any(tok.lower() in ocr_text.lower() for tok in AI_DISCLOSURE_TOKENS):
+    if _has_disclosure(ocr_text):
         disclosure = "pass"
     elif not has_cjk:
         # A Chinese disclosure label (e.g. "AI生成合成内容") cannot be OCR-verified
@@ -335,6 +382,12 @@ def gate_f(path: Path, man: dict[str, dict], asset: str) -> GateResult:
                           "aspect + decode OK; disclosure undetermined (no CJK OCR pack to read a zh label)",
                           ev)
     return GateResult("F", "pass", "final decode, aspect and disclosure verified", ev)
+
+
+def _has_disclosure(ocr_text: str) -> bool:
+    """Tolerant AI-disclosure detection against noisy OCR output."""
+    compact = re.sub(r"\s+", "", ocr_text.lower())
+    return any(re.search(p, compact) for p in AI_DISCLOSURE_PATTERNS)
 
 
 def _ocr_langs() -> set[str]:
@@ -354,8 +407,15 @@ def _ocr_frames(path: Path, meta: dict) -> str:
         dur = 0.0
     text = []
     tmp = Path("/tmp/zyk_gate_ocr.png")
-    for at in (dur * 0.5, max(0.0, dur - 1.0)):
+    # Sample across the whole timeline, not just two frames: a disclosure label may sit
+    # anywhere in the video, and a miss would falsely report a compliance failure.
+    # Upscale 3x + grayscale: the label is small relative to a 1080x1920 frame and
+    # tesseract drops it at native resolution, which would false-FAIL a compliant master.
+    durs = max(0.0, dur - 0.5)
+    for frac in (0.02, 0.25, 0.5, 0.75, 0.98):
+        at = min(durs, dur * frac)
         _run(["ffmpeg", "-y", "-v", "error", "-ss", f"{at:.2f}", "-i", str(path),
+              "-vf", "scale=iw*3:ih*3,format=gray",
               "-frames:v", "1", "-update", "1", str(tmp)])
         if tmp.is_file() and tmp.stat().st_size:
             r = _run(["tesseract", str(tmp), "stdout", "-l", "eng+chi_sim"])
@@ -379,17 +439,49 @@ def gate_g(asset: str, path: Path) -> GateResult:
     if asset not in names:
         return GateResult("G", "fail", f"{asset} not present in release {MEDIA_RELEASE_TAG}",
                           {"url": url})
-    return GateResult("G", "pass", f"release asset present + served at {url}",
-                      {"url": url, "bytes": path.stat().st_size})
+    # Roadmap Gate G asks for "uploaded bytes/hash where possible". GitHub's asset API
+    # exposes size but not a digest, so verify the published byte length against the
+    # local master. A mismatch means the served rendition is not the reviewed master.
+    local_bytes = path.stat().st_size
+    try:
+        assets = json.loads(r.stdout).get("assets", [])
+        pub_bytes = next((a.get("size") for a in assets if a["name"] == asset), None)
+    except (json.JSONDecodeError, KeyError, TypeError):
+        pub_bytes = None
+    ev = {"url": url, "bytes": local_bytes, "published_bytes": pub_bytes}
+    if pub_bytes is None:
+        return GateResult("G", "pending",
+                          f"{asset} present but published size unavailable; byte match unverified",
+                          ev)
+    if pub_bytes != local_bytes:
+        return GateResult("G", "fail",
+                          f"published bytes {pub_bytes} != local master {local_bytes}",
+                          ev)
+    return GateResult("G", "pass", f"release asset present, bytes match ({local_bytes}) at {url}",
+                      ev)
 
 
-def gate_asset(asset: str, path: Path, man: dict, all_hashes: dict) -> AssetReceipt:
+def load_reviews() -> dict[str, dict]:
+    out: dict[str, dict] = {}
+    if REVIEW_DIR.is_dir():
+        for f in sorted(REVIEW_DIR.glob("*.json")):
+            try:
+                data = json.loads(f.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError):
+                continue
+            name = data.get("asset") or f.stem
+            out[name] = data
+    return out
+
+
+def gate_asset(asset: str, path: Path, man: dict, all_hashes: dict,
+               reviews: dict | None = None) -> AssetReceipt:
     rec = AssetReceipt(asset)
     rec.gates.append(gate_a(asset, path, man))
     b = gate_b(path)
     rec.gates.append(b)
     rec.gates.append(gate_c(asset, all_hashes))
-    rec.gates.append(gate_d(path))
+    rec.gates.append(gate_d(path, reviews))
     try:
         meta = ffprobe_streams(path)
     except RuntimeError as exc:
@@ -405,25 +497,36 @@ def gate_asset(asset: str, path: Path, man: dict, all_hashes: dict) -> AssetRece
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--assets", nargs="*", default=None)
+    ap.add_argument("--media-dir", default=None,
+                    help="override the media directory (e.g. a remediation staging dir)")
+    ap.add_argument("--manifest", default=None,
+                    help="override the provenance manifest (e.g. a staging manifest)")
     ap.add_argument("--json", action="store_true")
     ap.add_argument("--decide", action="store_true",
                     help="exit 1 unless every asset is RELEASE_READY")
     args = ap.parse_args()
 
     assets = args.assets or list(DEFAULT_ASSETS)
+    global MANIFEST
+    if args.manifest:
+        MANIFEST = Path(args.manifest)
     man = load_manifest()
-    paths = {a: (PUBLIC_MEDIA / a) for a in assets}
+    reviews = load_reviews()
+    media_dir = Path(args.media_dir) if args.media_dir else PUBLIC_MEDIA
+    paths = {a: (media_dir / a) for a in assets}
 
     all_hashes = {}
     for a, p in paths.items():
         if p.is_file():
             all_hashes[a] = sample_dhashes(p)
 
-    receipts = [gate_asset(a, paths[a], man, all_hashes) for a in assets]
+    receipts = [gate_asset(a, paths[a], man, all_hashes, reviews) for a in assets]
 
     payload = {
         "generated_utc": datetime.now(timezone.utc).isoformat(),
         "gate_set": "A-G (ZYK_MEDIA_PRODUCTION_ROADMAP v1.1 §4 / v1.2 §4)",
+        "media_dir": str(media_dir),
+        "reviews_loaded": sorted(reviews),
         "assets": [r.as_dict() for r in receipts],
     }
     RECEIPT_DIR.mkdir(parents=True, exist_ok=True)

@@ -1,0 +1,319 @@
+{
+  "generated_utc": "2026-11-17T23:59:02.457015+00:00",
+  "gate_set": "A-G (ZYK_MEDIA_PRODUCTION_ROADMAP v1.1 §4 / v1.2 §4)",
+  "media_dir": "/tmp/zyk-remediated",
+  "assets": [
+    {
+      "asset": "pilot-ep1-9x16.mp4",
+      "verdict": "BLOCKED",
+      "gates": [
+        {
+          "gate": "A",
+          "status": "fail",
+          "detail": "size 18958098 != manifest 15977372",
+          "evidence": {}
+        },
+        {
+          "gate": "B",
+          "status": "pass",
+          "detail": "ffprobe valid + full decode clean",
+          "evidence": {
+            "codec": "h264",
+            "width": 1080,
+            "height": 1920,
+            "fps": 30.0,
+            "duration": "44.433333",
+            "audio_samples": "44.296000"
+          }
+        },
+        {
+          "gate": "C",
+          "status": "pass",
+          "detail": "no cross-asset duplicate footage across 12 sampled frames",
+          "evidence": {}
+        },
+        {
+          "gate": "D",
+          "status": "pending",
+          "detail": "content/narrative accuracy and lip-sync require human or vision review",
+          "evidence": {
+            "note": "not auto-decidable; do not treat as pass"
+          }
+        },
+        {
+          "gate": "E",
+          "status": "pass",
+          "detail": "A/V sync, loudness and silence within tolerance",
+          "evidence": {
+            "video_dur": 44.433,
+            "audio_dur": 44.296,
+            "integrated_lufs": -14.0,
+            "true_peak_dbfs": -1.4,
+            "silences_ge_2s": 0
+          }
+        },
+        {
+          "gate": "F",
+          "status": "pass",
+          "detail": "final decode, aspect and disclosure verified",
+          "evidence": {
+            "width": 1080,
+            "height": 1920,
+            "sha256": "406a6d02e31a99ea42a97a4a29a3d9226404fc727441bf4038050c58dcc2f98e",
+            "bytes": 18958098,
+            "ocr_excerpt": "ZYKAI.NET - GLOBAL SCHOOL JOB PORTAL\nPOV: FIRST 30s OF YOUR DEMO LESSON\n\n‘Pam PS. | ~\nAVEIRAIRPIZA - Al-Assisted Visuals & Voice - ZYKai.net\n\na |\n\nbe\n\nMR. STERLING - BRITISH HOD / SLT\n\n“20 mins of teacher-talk & a 40-slide PPT... A...\nre students grading your transitions?”\n\n“讲台 独白 20 分 钟 +40 页 PPT..….. 你 以 为 学 生 是\n在 给 你 的 动画 特效 打分 吗 ?”\n\nNAS Jiaxing, Sister Schools & Global Jobs (Ref: William Morri",
+            "ocr_langs": [
+              "chi_sim",
+              "eng",
+              "osd"
+            ]
+          }
+        },
+        {
+          "gate": "G",
+          "status": "fail",
+          "detail": "published bytes 15977372 != local master 18958098",
+          "evidence": {
+            "url": "https://github.com/editormorris-svg/zykai-net/releases/download/media-v20261108/pilot-ep1-9x16.mp4",
+            "bytes": 18958098,
+            "published_bytes": 15977372
+          }
+        }
+      ]
+    },
+    {
+      "asset": "student-leo-9x16.mp4",
+      "verdict": "BLOCKED",
+      "gates": [
+        {
+          "gate": "A",
+          "status": "fail",
+          "detail": "size 13095412 != manifest 9312051",
+          "evidence": {}
+        },
+        {
+          "gate": "B",
+          "status": "pass",
+          "detail": "ffprobe valid + full decode clean",
+          "evidence": {
+            "codec": "h264",
+            "width": 1080,
+            "height": 1920,
+            "fps": 30.0,
+            "duration": "27.733333",
+            "audio_samples": "27.687000"
+          }
+        },
+        {
+          "gate": "C",
+          "status": "pass",
+          "detail": "no cross-asset duplicate footage across 12 sampled frames",
+          "evidence": {}
+        },
+        {
+          "gate": "D",
+          "status": "pending",
+          "detail": "content/narrative accuracy and lip-sync require human or vision review",
+          "evidence": {
+            "note": "not auto-decidable; do not treat as pass"
+          }
+        },
+        {
+          "gate": "E",
+          "status": "pass",
+          "detail": "A/V sync, loudness and silence within tolerance",
+          "evidence": {
+            "video_dur": 27.733,
+            "audio_dur": 27.687,
+            "integrated_lufs": -14.1,
+            "true_peak_dbfs": -1.5,
+            "silences_ge_2s": 0
+          }
+        },
+        {
+          "gate": "F",
+          "status": "pass",
+          "detail": "final decode, aspect and disclosure verified",
+          "evidence": {
+            "width": 1080,
+            "height": 1920,
+            "sha256": "f404fb4a6a8c29b3b66596421f12473578312e7de10c8b9f46c5a3a78d6be59d",
+            "bytes": 13095412,
+            "ocr_excerpt": "ZYKAI STUDENT LAB - RESPONSIBLE Al & TIER UPGRADE STORY\nDANGER #1: THE HALLUCINATED QUOTE TRAP\n\nwal te SAAR\n\n. Al-Assisted Visuals & Voice - ZYKai.net\n| NS AN SN * ¥\n和 晤 ak ‘ NI\n- * : 4 . :\n—=— -\n{ |\n\n=...\n\nF\n\n~ 二 各\n\n~ . 有 人\n| |\n:\ni » =\n天 ‘\n\n/\n\n1\n\nLEO ZHANG ( 张 子 轩 ) . YEAR 11 IGCSE / IB STUDENT\n\n“I asked a generic bot to write my Macbeth ess...\nay—it invented a fake Shakespeare quote!”\n\n“上 学 期 我 ",
+            "ocr_langs": [
+              "chi_sim",
+              "eng",
+              "osd"
+            ]
+          }
+        },
+        {
+          "gate": "G",
+          "status": "fail",
+          "detail": "published bytes 9312051 != local master 13095412",
+          "evidence": {
+            "url": "https://github.com/editormorris-svg/zykai-net/releases/download/media-v20261108/student-leo-9x16.mp4",
+            "bytes": 13095412,
+            "published_bytes": 9312051
+          }
+        }
+      ]
+    },
+    {
+      "asset": "student-chloe-9x16.mp4",
+      "verdict": "BLOCKED",
+      "gates": [
+        {
+          "gate": "A",
+          "status": "fail",
+          "detail": "size 12610692 != manifest 9255708",
+          "evidence": {}
+        },
+        {
+          "gate": "B",
+          "status": "pass",
+          "detail": "ffprobe valid + full decode clean",
+          "evidence": {
+            "codec": "h264",
+            "width": 1080,
+            "height": 1920,
+            "fps": 30.0,
+            "duration": "28.933333",
+            "audio_samples": "28.797000"
+          }
+        },
+        {
+          "gate": "C",
+          "status": "pass",
+          "detail": "no cross-asset duplicate footage across 12 sampled frames",
+          "evidence": {}
+        },
+        {
+          "gate": "D",
+          "status": "pending",
+          "detail": "content/narrative accuracy and lip-sync require human or vision review",
+          "evidence": {
+            "note": "not auto-decidable; do not treat as pass"
+          }
+        },
+        {
+          "gate": "E",
+          "status": "pass",
+          "detail": "A/V sync, loudness and silence within tolerance",
+          "evidence": {
+            "video_dur": 28.933,
+            "audio_dur": 28.797,
+            "integrated_lufs": -14.0,
+            "true_peak_dbfs": -1.5,
+            "silences_ge_2s": 0
+          }
+        },
+        {
+          "gate": "F",
+          "status": "pass",
+          "detail": "final decode, aspect and disclosure verified",
+          "evidence": {
+            "width": 1080,
+            "height": 1920,
+            "sha256": "ab03ac6fddf452d39cf590ee53c290e1705f58ac07ca1216d10f3b4bef28bbc6",
+            "bytes": 12610692,
+            "ocr_excerpt": "ZYKAI STUDENT LAB - ACADEMIC INTEGRITY & OXBRIDGE PREP\nDANGER #2: THE ’ROBOTIC Al VOICE’ TRAP\n\nCHLOE LIN (44503) . YEAR 12 IB DIPLOMA PREFECT\n\n“Whenever classmates let Al rewrite their para...\ngraphs, their personal voice vanished.”\n\nTEAIARE, KmiInNRESH a 而 是 让 AI\n改写 后 大 去 了 目 己 的 学 术 批 判 瑞 昔 。\n\nRed-Team Critic & Oxbridge Interview Simulator 一 zykai.net/en/portal.html\n\nZYKAI STUDENT LAB - ACADEMIC",
+            "ocr_langs": [
+              "chi_sim",
+              "eng",
+              "osd"
+            ]
+          }
+        },
+        {
+          "gate": "G",
+          "status": "fail",
+          "detail": "published bytes 9255708 != local master 12610692",
+          "evidence": {
+            "url": "https://github.com/editormorris-svg/zykai-net/releases/download/media-v20261108/student-chloe-9x16.mp4",
+            "bytes": 12610692,
+            "published_bytes": 9255708
+          }
+        }
+      ]
+    },
+    {
+      "asset": "student-pd-drama-ep1-9x16.mp4",
+      "verdict": "BLOCKED",
+      "gates": [
+        {
+          "gate": "A",
+          "status": "fail",
+          "detail": "size 17198465 != manifest 12328601",
+          "evidence": {}
+        },
+        {
+          "gate": "B",
+          "status": "pass",
+          "detail": "ffprobe valid + full decode clean",
+          "evidence": {
+            "codec": "h264",
+            "width": 1080,
+            "height": 1920,
+            "fps": 30.0,
+            "duration": "38.066667",
+            "audio_samples": "37.954000"
+          }
+        },
+        {
+          "gate": "C",
+          "status": "pass",
+          "detail": "no cross-asset duplicate footage across 12 sampled frames",
+          "evidence": {}
+        },
+        {
+          "gate": "D",
+          "status": "pending",
+          "detail": "content/narrative accuracy and lip-sync require human or vision review",
+          "evidence": {
+            "note": "not auto-decidable; do not treat as pass"
+          }
+        },
+        {
+          "gate": "E",
+          "status": "pass",
+          "detail": "A/V sync, loudness and silence within tolerance",
+          "evidence": {
+            "video_dur": 38.067,
+            "audio_dur": 37.954,
+            "integrated_lufs": -14.0,
+            "true_peak_dbfs": -1.5,
+            "silences_ge_2s": 0
+          }
+        },
+        {
+          "gate": "F",
+          "status": "pass",
+          "detail": "final decode, aspect and disclosure verified",
+          "evidence": {
+            "width": 1080,
+            "height": 1920,
+            "sha256": "b2fd361c900158d44f4d21fb5287bfba80f7b51b037b07fce04a0d9f2dcd2208",
+            "bytes": 17198465,
+            "ocr_excerpt": "ZYKAI CAMPUS DRAMA & SCHOOL PD SERIES : EPISODE #1\nSCENE 1: THE 30-SECOND SHORTCUT TEMPTATION\n\nit ts SARE\n\n。 ALAssisted Visuals & Voice : ZYKai.net\n\nROY\n> \\ 1\n\n\\ ’ 7 *\n\nLEO ZHANG . YEAR 11 (\"THE SHORTCUT HACKER’)\n\n“Chloe, why don’t we just paste the essay prom...\npt, hit generate, and go play football?”\n\n“ 知 夏 ， 周 五 要 交 物 理 报告 和 《远大 前 程 》 论 文 ， 直 接\n把 题目 丢 给 Al 一 键 生成 去 踢 球 不 好 吗 2”\n\nUse in Staff P",
+            "ocr_langs": [
+              "chi_sim",
+              "eng",
+              "osd"
+            ]
+          }
+        },
+        {
+          "gate": "G",
+          "status": "fail",
+          "detail": "published bytes 12328601 != local master 17198465",
+          "evidence": {
+            "url": "https://github.com/editormorris-svg/zykai-net/releases/download/media-v20261108/student-pd-drama-ep1-9x16.mp4",
+            "bytes": 17198465,
+            "published_bytes": 12328601
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "asset": "student-chloe-9x16.mp4",
+  "sha256": "786fbbd18bafe1e32c188016be8a3455bbe8abf1560efe793a3aed8dd3c1ca46",
+  "reviewer": "HIM (vision model) under owner authorisation",
+  "reviewed_utc": "2026-11-17T23:25:00Z",
+  "verdict": "fail",
+  "notes": "Frames sampled at 5/30/55/80%. AI-disclosure label present and readable in all frames. Blocker: English captions split mid-word with ellipsis in all four frames ('para.../graphs', 'command i.../t', 'mock.../interviews'); frame 4's Chinese caption also truncates mid-phrase at '校园负责' and the English lacks a closing quote. Root cause fixed at source in render-student-personas.py (fixed-offset subtitle slicing replaced with word-boundary wrapping). Re-render blocked: Veo source clips absent, lane scope-locked to 2026-11-22. No structural face artifacts; subject occasionally cropped at frame edge."
+}
