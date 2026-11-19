@@ -45,7 +45,7 @@ FORBIDDEN_PHRASES = (
 FORBIDDEN_CATALOG_SUBSTRINGS = ('Staff-Get-Staff', 'Staff Get Staff', 'referral_bonus')
 
 # Internal HR personal addresses (school/group staff), never published.
-HR_ADDRESS = re.compile(r'[a-z][a-z0-9._-]*@(?:nacis|nordanglia)[a-z0-9.-]*\.(?:cn|com)', re.I)
+HR_ADDRESS = re.compile(r'[a-z][a-z0-9._-]*@(?:nacis\.cn|nordanglia\.com|daischina\.net|nasbeijing\.cn|nasguangzhou\.cn|bsn\.org\.cn|bsg\.org\.cn|lis-chengdu\.com)', re.I)
 
 
 class ReferralPrivacyTests(unittest.TestCase):
