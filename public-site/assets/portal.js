@@ -116,6 +116,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Whole-education-market sector filters (owner directive 2026-11-27).
+  const sectorBtns = document.querySelectorAll('.zyk-sector-btn');
+  if (sectorBtns.length) {
+    const jobCards = document.querySelectorAll('.job-card[data-sector]');
+    const countEl = document.getElementById('zyk-sector-count');
+    const emptyEl = document.getElementById('zyk-sector-empty');
+    sectorBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const f = btn.getAttribute('data-sector-filter');
+        sectorBtns.forEach((b) => {
+          const on = b === btn;
+          b.style.borderColor = on ? 'var(--cyan)' : '';
+          b.style.color = on ? 'var(--cyan)' : '';
+        });
+        let shown = 0;
+        jobCards.forEach((c) => {
+          const show = f === 'all' || c.getAttribute('data-sector') === f;
+          c.style.display = show ? '' : 'none';
+          if (show) shown += 1;
+        });
+        if (countEl) countEl.textContent = shown;
+        if (emptyEl) emptyEl.style.display = shown === 0 ? '' : 'none';
+      });
+    });
+  }
+
   const existing = getAccount();
   if (existing) renderDashboard(existing);
   else updateCheckoutLinks(null);
