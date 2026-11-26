@@ -1,0 +1,371 @@
+{
+  "generated_utc": "2026-11-20T07:42:04.677549+00:00",
+  "gate_set": "A-G (ZYK_MEDIA_PRODUCTION_ROADMAP v1.1 §4 / v1.2 §4)",
+  "media_dir": "/home/dell01/work/zykai-studio/media-staging/rerender-2026-11-20",
+  "reviews_loaded": [
+    "pilot-ep1-9x16.mp4",
+    "student-chloe-9x16.mp4",
+    "student-leo-9x16.mp4",
+    "student-pd-drama-ep1-9x16.mp4"
+  ],
+  "assets": [
+    {
+      "asset": "pilot-ep1-9x16.mp4",
+      "verdict": "BLOCKED",
+      "gates": [
+        {
+          "gate": "A",
+          "status": "pass",
+          "detail": "manifest size+sha256 match",
+          "evidence": {
+            "sha256": "04a8d7b325c93f258fbe84256d38cccae6291c3d533589a0ff58929bbff17237",
+            "bytes": 16830723
+          }
+        },
+        {
+          "gate": "B",
+          "status": "pass",
+          "detail": "ffprobe valid + full decode clean",
+          "evidence": {
+            "codec": "h264",
+            "width": 1080,
+            "height": 1920,
+            "fps": 30.0,
+            "duration": "44.433333",
+            "audio_samples": "44.295000"
+          }
+        },
+        {
+          "gate": "C",
+          "status": "pass",
+          "detail": "no cross-asset duplicate footage across 12 sampled frames",
+          "evidence": {}
+        },
+        {
+          "gate": "D",
+          "status": "pending",
+          "detail": "recorded review hash does not match this master; re-review required",
+          "evidence": {
+            "sha256": "04a8d7b325c93f258fbe84256d38cccae6291c3d533589a0ff58929bbff17237",
+            "review_sha256": "a4469a91366e4fdc8a85d03dbd4fd197968fb0002da3c74ef6aad1788c9e4579",
+            "reviewer": "HIM (vision model) under owner authorisation",
+            "reviewed_utc": "2026-11-17T23:25:00Z",
+            "notes": "Frames sampled at 5/30/55/80%. AI-disclosure label present and readable in all frames (Gate F concern, satisfied). Blocker: burned-in English captions split mid-word with an inserted ellipsis in all four frames, e.g. 'A.../re students grading', 'Jiaxin.../g, 13 sister schools', and the CTA 'Willia.../m Morris' which breaks the founder's name. Root cause found and fixed at source in render-student-personas.py (render_9x16_segment sliced subtitles at fixed character offsets: sub_en_str[:46] / [46:92]); replaced with word-boundary wrap_caption(). These masters cannot be re-rendered because the Veo source clips (static10_*_1080p.mp4) are no longer on disk and the Veo lane is under an owner scope-lock to 2026-11-22. Minor: Mr. Sterling's role label differs between scenes; confirm intended. Minor: generative hand/tablet blur artifacts."
+          }
+        },
+        {
+          "gate": "E",
+          "status": "pass",
+          "detail": "A/V sync, loudness and silence within tolerance",
+          "evidence": {
+            "video_dur": 44.433,
+            "audio_dur": 44.295,
+            "integrated_lufs": -13.9,
+            "true_peak_dbfs": -1.5,
+            "silences_ge_2s": 0
+          }
+        },
+        {
+          "gate": "F",
+          "status": "pass",
+          "detail": "final decode, aspect and disclosure verified",
+          "evidence": {
+            "width": 1080,
+            "height": 1920,
+            "sha256": "04a8d7b325c93f258fbe84256d38cccae6291c3d533589a0ff58929bbff17237",
+            "bytes": 16830723,
+            "ocr_excerpt": "ZYKAI.NET - GLOBAL SCHOOL JOB PORTAL\nPOV: FIRST 30s OF YOUR DEMO LESSON\n\naw\n\n- a ~~ 中\nAT 和 成 会 成 内 容 AT-Assisted Visuals & Voic\n\ne- ZYKai.net\n\n‘\n\nen\n\nMR. STERLING - BRITISH HOD / SLT\n\n“20 mins of teacher-talk & a 40-slide PPT... Are students\ngrading your transitions?”\n\n“] 井 台独 白 20 分 钟 +40 页 PPT..….. 你 以 为 学 生 是 在 给 你 的 动画 特效\n打分 吗 ?”\n\nNAS Jiaxing, Sister Schools & Global Jobs (Ref: William Morris)",
+            "ocr_langs": [
+              "chi_sim",
+              "eng",
+              "osd"
+            ]
+          }
+        },
+        {
+          "gate": "G",
+          "status": "fail",
+          "detail": "published bytes 15977372 != local master 16830723",
+          "evidence": {
+            "url": "https://github.com/editormorris-svg/zykai-net/releases/download/media-v20261108/pilot-ep1-9x16.mp4",
+            "bytes": 16830723,
+            "published_bytes": 15977372
+          }
+        }
+      ]
+    },
+    {
+      "asset": "student-leo-9x16.mp4",
+      "verdict": "BLOCKED",
+      "gates": [
+        {
+          "gate": "A",
+          "status": "pass",
+          "detail": "manifest size+sha256 match",
+          "evidence": {
+            "sha256": "b1f33daa9db42b012036833db6c1357e9ae03cb76d9f9a5132b088464427b189",
+            "bytes": 13116429
+          }
+        },
+        {
+          "gate": "B",
+          "status": "pass",
+          "detail": "ffprobe valid + full decode clean",
+          "evidence": {
+            "codec": "h264",
+            "width": 1080,
+            "height": 1920,
+            "fps": 30.0,
+            "duration": "27.733333",
+            "audio_samples": "27.687000"
+          }
+        },
+        {
+          "gate": "C",
+          "status": "pass",
+          "detail": "no cross-asset duplicate footage across 12 sampled frames",
+          "evidence": {}
+        },
+        {
+          "gate": "D",
+          "status": "pending",
+          "detail": "recorded review hash does not match this master; re-review required",
+          "evidence": {
+            "sha256": "b1f33daa9db42b012036833db6c1357e9ae03cb76d9f9a5132b088464427b189",
+            "review_sha256": "8bba82047301db4d74bb87ed297905b45e88f67b469e6e64b8cdaa6fbcfeefc1",
+            "reviewer": "HIM (vision model) under owner authorisation",
+            "reviewed_utc": "2026-11-17T23:25:00Z",
+            "notes": "Frames sampled at 5/30/55/80%. AI-disclosure label present and readable in all frames. Blocker: English captions split mid-word with ellipsis in every frame ('ess.../ay', 'verifie.../d', 'debugge.../r') and none of the quoted captions close their quotation mark. One frame shows a garbled Chinese character after 'ZYK' ('闩户' instead of '门户'). Root cause fixed at source in render-student-personas.py (fixed-offset subtitle slicing replaced with word-boundary wrapping); re-render blocked because Veo source clips are absent and the Veo lane is scope-locked to 2026-11-22. No structural face artifacts; minor motion softness."
+          }
+        },
+        {
+          "gate": "E",
+          "status": "pass",
+          "detail": "A/V sync, loudness and silence within tolerance",
+          "evidence": {
+            "video_dur": 27.733,
+            "audio_dur": 27.687,
+            "integrated_lufs": -14.1,
+            "true_peak_dbfs": -1.4,
+            "silences_ge_2s": 0
+          }
+        },
+        {
+          "gate": "F",
+          "status": "pass",
+          "detail": "final decode, aspect and disclosure verified",
+          "evidence": {
+            "width": 1080,
+            "height": 1920,
+            "sha256": "b1f33daa9db42b012036833db6c1357e9ae03cb76d9f9a5132b088464427b189",
+            "bytes": 13116429,
+            "ocr_excerpt": "ZYKAI STUDENT LAB - RESPONSIBLE Al & TIER UPGRADE STORY\nDANGER #1: THE HALLUCINATED QUOTE TRAP\n\nVay’ A SAREE\n本 Al-Assisted Visuals & Voice - ZYKai.net\n\nA\\\\ “Ewe _\n\\ ~ SS NS \\\n. oN SY ;\n~ A: 和 \\ ‘ .\nf =\" ? . > As\n\naf\n\n’ :\n. .\nA ' e\n; SS\n中 全 入\n>\n\nLEO ZHANG ( 张 子 轩 ) - YEAR 11 IGCSE / IB STUDENT\n\n“I asked a generic bot to write my Macbeth essay—it\ninvented a fake Shakespeare quote!”\n\n“ESHA BAIFARS (5",
+            "ocr_langs": [
+              "chi_sim",
+              "eng",
+              "osd"
+            ]
+          }
+        },
+        {
+          "gate": "G",
+          "status": "fail",
+          "detail": "published bytes 9312051 != local master 13116429",
+          "evidence": {
+            "url": "https://github.com/editormorris-svg/zykai-net/releases/download/media-v20261108/student-leo-9x16.mp4",
+            "bytes": 13116429,
+            "published_bytes": 9312051
+          }
+        }
+      ]
+    },
+    {
+      "asset": "student-chloe-9x16.mp4",
+      "verdict": "BLOCKED",
+      "gates": [
+        {
+          "gate": "A",
+          "status": "pass",
+          "detail": "manifest size+sha256 match",
+          "evidence": {
+            "sha256": "482469b66c6f187311b23fb9a1bc76439335908d63d78aea9b1707221591225f",
+            "bytes": 12336910
+          }
+        },
+        {
+          "gate": "B",
+          "status": "pass",
+          "detail": "ffprobe valid + full decode clean",
+          "evidence": {
+            "codec": "h264",
+            "width": 1080,
+            "height": 1920,
+            "fps": 30.0,
+            "duration": "28.833333",
+            "audio_samples": "28.767000"
+          }
+        },
+        {
+          "gate": "C",
+          "status": "fail",
+          "detail": "1 cross-asset near-identical frame pair(s)",
+          "evidence": {
+            "clashes": [
+              {
+                "other": "student-pd-drama-ep1-9x16.mp4",
+                "ham": 6,
+                "at": 18.83,
+                "other_at": 34.9
+              }
+            ]
+          }
+        },
+        {
+          "gate": "D",
+          "status": "pending",
+          "detail": "recorded review hash does not match this master; re-review required",
+          "evidence": {
+            "sha256": "482469b66c6f187311b23fb9a1bc76439335908d63d78aea9b1707221591225f",
+            "review_sha256": "786fbbd18bafe1e32c188016be8a3455bbe8abf1560efe793a3aed8dd3c1ca46",
+            "reviewer": "HIM (vision model) under owner authorisation",
+            "reviewed_utc": "2026-11-17T23:25:00Z",
+            "notes": "Frames sampled at 5/30/55/80%. AI-disclosure label present and readable in all frames. Blocker: English captions split mid-word with ellipsis in all four frames ('para.../graphs', 'command i.../t', 'mock.../interviews'); frame 4's Chinese caption also truncates mid-phrase at '校园负责' and the English lacks a closing quote. Root cause fixed at source in render-student-personas.py (fixed-offset subtitle slicing replaced with word-boundary wrapping). Re-render blocked: Veo source clips absent, lane scope-locked to 2026-11-22. No structural face artifacts; subject occasionally cropped at frame edge."
+          }
+        },
+        {
+          "gate": "E",
+          "status": "pass",
+          "detail": "A/V sync, loudness and silence within tolerance",
+          "evidence": {
+            "video_dur": 28.833,
+            "audio_dur": 28.767,
+            "integrated_lufs": -14.0,
+            "true_peak_dbfs": -1.5,
+            "silences_ge_2s": 0
+          }
+        },
+        {
+          "gate": "F",
+          "status": "pass",
+          "detail": "final decode, aspect and disclosure verified",
+          "evidence": {
+            "width": 1080,
+            "height": 1920,
+            "sha256": "482469b66c6f187311b23fb9a1bc76439335908d63d78aea9b1707221591225f",
+            "bytes": 12336910,
+            "ocr_excerpt": "ZYKAI STUDENT LAB - ACADEMIC INTEGRITY & OXBRIDGE PREP\nDANGER #2: THE ’ROBOTIC Al VOICE’ TRAP\n\n仿\n\nCHLOE LIN ( 林 知 夏 ) . YEAR 12 IB DIPLOMA PREFECT\n\n“Whenever classmates let Al rewrite their paragraphs, their\npersonal voice vanished.”\n\n“作为 1B 高 分 生 ， sme 白 的 不 是 写 不 出 ， 而 是 让 Al 改写 后 失去 了 自己\nNSA aS Fio\n\nRed-Team Critic & Oxbridge Interview Simulator 一 zykai.net/en/portal.html\n\nZYKAI STUDENT LAB - A",
+            "ocr_langs": [
+              "chi_sim",
+              "eng",
+              "osd"
+            ]
+          }
+        },
+        {
+          "gate": "G",
+          "status": "fail",
+          "detail": "published bytes 9255708 != local master 12336910",
+          "evidence": {
+            "url": "https://github.com/editormorris-svg/zykai-net/releases/download/media-v20261108/student-chloe-9x16.mp4",
+            "bytes": 12336910,
+            "published_bytes": 9255708
+          }
+        }
+      ]
+    },
+    {
+      "asset": "student-pd-drama-ep1-9x16.mp4",
+      "verdict": "BLOCKED",
+      "gates": [
+        {
+          "gate": "A",
+          "status": "pass",
+          "detail": "manifest size+sha256 match",
+          "evidence": {
+            "sha256": "9e751c620b180aa5e74d2f8ee4124a5f18de46fde1622270ea62cd3afd2e6dea",
+            "bytes": 17205360
+          }
+        },
+        {
+          "gate": "B",
+          "status": "pass",
+          "detail": "ffprobe valid + full decode clean",
+          "evidence": {
+            "codec": "h264",
+            "width": 1080,
+            "height": 1920,
+            "fps": 30.0,
+            "duration": "38.233333",
+            "audio_samples": "38.154000"
+          }
+        },
+        {
+          "gate": "C",
+          "status": "fail",
+          "detail": "1 cross-asset near-identical frame pair(s)",
+          "evidence": {
+            "clashes": [
+              {
+                "other": "student-chloe-9x16.mp4",
+                "ham": 6,
+                "at": 34.9,
+                "other_at": 18.83
+              }
+            ]
+          }
+        },
+        {
+          "gate": "D",
+          "status": "pending",
+          "detail": "recorded review hash does not match this master; re-review required",
+          "evidence": {
+            "sha256": "9e751c620b180aa5e74d2f8ee4124a5f18de46fde1622270ea62cd3afd2e6dea",
+            "review_sha256": "2d03181e3319bd7b89bf51117174ef4ff912d9121d653fdcdadd797a36764925",
+            "reviewer": "HIM (vision model) under owner authorisation",
+            "reviewed_utc": "2026-11-17T23:25:00Z",
+            "notes": "Frames sampled at 5/30/55/80%. AI-disclosure label present and readable in all frames. Blocker: English captions split mid-word with ellipsis in all four scenes ('prom.../pt', 'Po.../ds') and 'at the boar...' truncates the word 'board'; scene 2's Chinese caption cuts off mid-sentence ('...先自测第一章') with a malformed '门' glyph. Root cause fixed at source in render-student-personas.py (fixed-offset subtitle slicing replaced with word-boundary wrapping). Re-render blocked: Veo source clips absent, lane scope-locked to 2026-11-22. Minor generative blur on hands/pen; no structural face artifacts."
+          }
+        },
+        {
+          "gate": "E",
+          "status": "pass",
+          "detail": "A/V sync, loudness and silence within tolerance",
+          "evidence": {
+            "video_dur": 38.233,
+            "audio_dur": 38.154,
+            "integrated_lufs": -13.9,
+            "true_peak_dbfs": -1.3,
+            "silences_ge_2s": 0
+          }
+        },
+        {
+          "gate": "F",
+          "status": "pass",
+          "detail": "final decode, aspect and disclosure verified",
+          "evidence": {
+            "width": 1080,
+            "height": 1920,
+            "sha256": "9e751c620b180aa5e74d2f8ee4124a5f18de46fde1622270ea62cd3afd2e6dea",
+            "bytes": 17205360,
+            "ocr_excerpt": "ZYKAI CAMPUS DRAMA & SCHOOL PD SERIES : EPISODE #1\nSCENE 1: THE 30-SECOND SHORTCUT TEMPTATION\n\ngal Yo SARE\n\n。 ALAssisted Visuals & Voice - ZYKai.net\nRN\n\n: NA\n\nRN NA\n\ne P\nA \" . We\n« 4\n\nPay a\n\nLEO ZHANG . YEAR 11 (\"THE SHORTCUT HACKER’)\n\n“Chloe, why don’t we just paste the essay prompt, hit\ngenerate, and go play football?”\n\n‘AIS, ADB RAM OLA) i¢M, BRIAR AAAI\n— He FA PERA EFAS ? ”\n\nUse in Staff PD, A",
+            "ocr_langs": [
+              "chi_sim",
+              "eng",
+              "osd"
+            ]
+          }
+        },
+        {
+          "gate": "G",
+          "status": "fail",
+          "detail": "published bytes 12328601 != local master 17205360",
+          "evidence": {
+            "url": "https://github.com/editormorris-svg/zykai-net/releases/download/media-v20261108/student-pd-drama-ep1-9x16.mp4",
+            "bytes": 17205360,
+            "published_bytes": 12328601
+          }
+        }
+      ]
+    }
+  ]
+}
